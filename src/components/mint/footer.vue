@@ -1,0 +1,28 @@
+<template>
+  <div class="mint-footer">
+    <div class="border"></div>
+    <div class="desc">© 2023 by xxx. All rights reserved！</div>
+  </div>
+</template>
+
+<script setup lang="ts"></script>
+
+<style scoped lang="scss">
+.mint-footer {
+  margin-top: 78px;
+  .border {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, white, transparent);
+  }
+  .desc {
+    font-size: 14px;
+    font-family: Archivo-Regular, Archivo;
+    font-weight: 400;
+    color: #FFFFFF;
+    line-height: 24px;
+    padding: 36px 0;
+    text-align: center;
+  }
+}
+</style>
