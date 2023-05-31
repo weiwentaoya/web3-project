@@ -13,25 +13,39 @@
 .home-page__contact {
   text-align: center;
   margin-top: 248px;
+  @media screen and (max-width: 768px) {
+    margin-top: 88px;
+  }
   .title {
     font-size: 50px;
     font-family: Chinese Rocks-Regular, Chinese Rocks;
     font-weight: 400;
     color: #fff;
     line-height: 60px;
+    @media screen and (max-width: 768px) {
+      font-size: 32px;
+      line-height: 38px;
+    }
   }
   .desc {
-    margin-top: 19px;
+    margin-top: 20px;
     font-size: 32px;
     font-family: Archivo-Bold, Archivo;
     font-weight: bold;
     color: #ffffff;
     line-height: 56px;
+    @media screen and (max-width: 768px) {
+      font-size: 16px;
+      line-height: 28px;
+    }
   }
   img {
     margin-top: 54px;
     width: 198px;
     height: 30px;
+    @media screen and (max-width: 768px) {
+      margin-top: 28px;
+    }
   }
   .reserved {
     margin-top: 42px;
@@ -41,6 +55,12 @@
     color: #ffffff;
     line-height: 24px;
     padding-bottom: 110px;
+    @media screen and (max-width: 768px) {
+      margin-top: 22px;
+      font-size: 12px;
+      line-height: 20px;
+      padding-bottom: 52px;
+    }
   }
 }
 </style>

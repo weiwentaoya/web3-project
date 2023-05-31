@@ -32,6 +32,11 @@ const props = defineProps(['init'])
     text-transform: uppercase;
     // 字体下划线
     text-decoration: none;
+    @media screen and (max-width: 768px) {
+      width: 50%;
+      height: 45px;
+      line-height: 45px;
+    }
   }
   .active {
     background: url(../../assets/images/mint/tab-bg.png) 100% no-repeat;

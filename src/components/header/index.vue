@@ -3,25 +3,49 @@
     <div class="header-nav__home">
       <img src="../../assets/images/home/image 30@2x.png" alt="" />
     </div>
-    <div class="header-nav__page">
-      <div
-        class="nav-items"
-        :class="active === item.id ? 'active' : ''"
-        v-for="item in navList"
-        :key="item.id"
-        @click="handleMoveTo(item)"
-      >
-        {{ item.title }}
+    <div class="header-nav__page" v-show="navShow" @click="handleSwitch(false)">
+      <div class="close">
+        <SvgIcon
+          class="close-icon"
+          name="close"
+          color="#fff"
+          width="24px"
+          height="24px"
+        />
+      </div>
+
+      <div class="nav-items">
+        <div
+          class="nav-item"
+          :class="active === item.id ? 'active' : ''"
+          v-for="item in navList"
+          :key="item.id"
+          @click="handleMoveTo(item)"
+        >
+          <span>{{ item.title }}</span>
+        </div>
       </div>
     </div>
     <div class="header-nav__buy">
       <img src="../../assets/images/home/Group 1@2x.png" alt="" />
+      <SvgIcon
+        @click="navShow = true"
+        class="nav"
+        name="nav"
+        color="#fff"
+        width="24px"
+        height="24px"
+      />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { throttle } from '@/utils/index'
+import { useWindowSize } from '@vueuse/core'
+
+const { width } = useWindowSize()
+
 const navList = [
   { title: 'HOME', id: 'banner', type: 'move' },
   { title: 'ABOUT', id: 'about', type: 'move' },
@@ -31,10 +55,12 @@ const navList = [
   { title: 'ROADMAP', id: 'roadMap', type: 'move' },
 ]
 import { useAppStore } from '@/store/modules/app'
-import { defineProps, nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { defineProps, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 const props = defineProps(['initActive'])
 
+const navShow = ref(false)
+const isM = ref(true)
 const router = useRouter()
 const route = useRoute()
 const store = useAppStore()
@@ -57,6 +83,18 @@ const handleMoveTo = (item: any) => {
   }
 }
 
+// 监听width
+watch(
+  () => width,
+  (val) => {
+    if (val.value > 768) {
+      isM.value = false
+    } else {
+      isM.value = true
+    }
+  },
+)
+
 onMounted(() => {
   if (store.active) {
     setTimeout(() => {
@@ -70,7 +108,16 @@ onMounted(() => {
   } else {
     initScroll()
   }
+  if (width.value > 768) {
+    isM.value = false
+    navShow.value = true
+  }
 })
+const handleSwitch = (val) => {
+  if (isM.value) {
+    navShow.value = val
+  }
+}
 onUnmounted(() => {
   console.log('onUnmounted')
   window.removeEventListener('scroll', handleScroll)
@@ -113,41 +160,107 @@ const handleScroll = throttle(() => {
   left: 0;
   width: 100%;
   z-index: 10;
-  padding: 0 30px;
+  padding: 0 22px;
   height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    background: transparent;
+    height: 66px;
+  }
   &__home {
     img {
       width: 52px;
       height: 52px;
+      @media screen and (max-width: 768px) {
+        width: 28px;
+        height: 28px;
+      }
     }
   }
   &__page {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .nav-items {
-      font-size: 20px;
-      font-family: Chinese Rocks-Regular, Chinese Rocks;
-      font-weight: 400;
-      color: #ffffff;
-      width: 144px;
-      height: 36px;
-      line-height: 24px;
-      padding: 6px 0 6px 32px;
-      cursor: pointer;
+    @media screen and (max-width: 768px) {
+      position: fixed;
+      right: 0;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: end;
+      animation: slide-in 0.5s ease-out;
     }
-    .active {
-      background: url(../../assets/images/home/nav-bg.png) 100% no-repeat;
-      background-size: 100% 100%;
+    @keyframes slide-in {
+      0% {
+        width: 0; /* 初始位置在右侧屏幕外 */
+      }
+      100% {
+        width: 100%; /* 最终位置在屏幕右侧 */
+      }
+    }
+    .close {
+      display: none;
+      @media screen and (max-width: 768px) {
+        display: inline-block;
+        position: absolute;
+        top: 18px;
+        right: 24px;
+      }
+    }
+    .nav-items {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 254px;
+        background: #000;
+        padding-left: 20px;
+        min-height: 100vh;
+        overflow-y: auto;
+        padding-top: 42px;
+      }
+      .nav-item {
+        font-size: 20px;
+        font-family: Chinese Rocks-Regular, Chinese Rocks;
+        font-weight: 400;
+        color: #ffffff;
+        width: 144px;
+        height: 36px;
+        line-height: 24px;
+        padding: 6px 0 6px 32px;
+        cursor: pointer;
+        @media screen and (max-width: 768px) {
+          height: 24px;
+          line-height: 24px;
+          padding: 0 0 0 32px;
+          margin-top: 40px;
+        }
+      }
+      .active {
+        background: url(../../assets/images/home/nav-bg.png) 100% no-repeat;
+        background-size: 100% 100%;
+      }
     }
   }
   &__buy {
+    display: flex;
+    align-items: center;
     img {
       width: 190px;
       height: 52px;
+      @media screen and (max-width: 768px) {
+        width: 100px;
+        height: 28px;
+        margin-right: 16px;
+      }
+    }
+    .nav {
+      display: none;
+      @media screen and (max-width: 768px) {
+        display: inline-block;
+      }
     }
   }
 }

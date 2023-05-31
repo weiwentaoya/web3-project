@@ -23,5 +23,8 @@ import Footer from '@/components/mint/footer.vue'
   height: 100%;
   min-height: 100vh;
   padding-top: 95px;
+  @media screen and (max-width: 768px) {
+    padding-top: 46px;
+  }
 }
 </style>

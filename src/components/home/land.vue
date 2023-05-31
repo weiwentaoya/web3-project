@@ -1,7 +1,7 @@
 <template>
   <div class="home-page__land w1400" id="land">
     <el-carousel
-      height="874px"
+      :height="carouselHeight"
       ref="carousel"
       :autoplay="false"
       arrow="never"
@@ -10,7 +10,7 @@
     >
       <el-carousel-item v-for="item in dataList" :key="item">
         <div class="content">
-          <div class="title"> {{ item.title }} </div>
+          <div class="title">{{ item.title }}</div>
           <p class="desc">
             {{ item.desc }}
           </p>
@@ -45,14 +45,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { useWindowSize } from '@vueuse/core'
+const { width } = useWindowSize()
+
 const carousel = ref(null)
-import path1 from '@/assets/images/home/Group 17@2x.png';
-import path2 from '@/assets/images/home/Group 17@2x(1).png';
-import path3 from '@/assets/images/home/Group 17@2x(2).png';
-import path4 from '@/assets/images/home/Group 17@2x(3).png';
-import path5 from '@/assets/images/home/Group 17@2x(4).png';
-import path6 from '@/assets/images/home/Group 17@2x(5).png';
+import path1 from '@/assets/images/home/Group 17@2x.png'
+import path2 from '@/assets/images/home/Group 17@2x(1).png'
+import path3 from '@/assets/images/home/Group 17@2x(2).png'
+import path4 from '@/assets/images/home/Group 17@2x(3).png'
+import path5 from '@/assets/images/home/Group 17@2x(4).png'
+import path6 from '@/assets/images/home/Group 17@2x(5).png'
 const dataList = [
   {
     id: 1,
@@ -95,6 +98,19 @@ const indicators = ref(0)
 const handleChange = (index: number) => {
   indicators.value = index
 }
+const carouselHeight = ref()
+onMounted(() => {
+  handleResize()
+  window.addEventListener('resize', handleResize)
+})
+const handleResize = () => {
+  console.log(window.innerWidth)
+  if (width.value < 768) {
+    carouselHeight.value = '625px'
+  } else {
+    carouselHeight.value = '874px'
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -102,15 +118,29 @@ const handleChange = (index: number) => {
   margin-top: 86px;
   background: url(../../assets/images/home/land-bg.png) 100% no-repeat;
   background-size: 100% 100%;
+  @media screen and (max-width: 768px) {
+    margin-top: 80px;
+    background: url(../../assets/images/home/land-bg2.png) 100% no-repeat;
+    background-size: 100% 100%;
+  }
   .arrow-l {
     position: absolute;
     top: 50%;
     left: 0;
     transform: translateY(-50%);
     cursor: pointer;
+    @media screen and (max-width: 768px) {
+      top: 152px;
+      left: 30px;
+      transform: initial;
+    }
     img {
       width: 84px;
       height: 84px;
+      @media screen and (max-width: 768px) {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
   .arrow-r {
@@ -119,18 +149,35 @@ const handleChange = (index: number) => {
     right: 0;
     transform: translateY(-50%);
     cursor: pointer;
+    @media screen and (max-width: 768px) {
+      top: 152px;
+      right: 30px;
+      transform: initial;
+    }
     img {
       width: 84px;
       height: 84px;
+      @media screen and (max-width: 768px) {
+        width: 30px;
+        height: 30px;
+      }
     }
   }
   .el-carousel__item {
     display: flex;
     justify-content: right;
     padding: 98px 80px;
+    @media screen and (max-width: 768px) {
+      flex-direction: column-reverse;
+      padding: 0;
+    }
     .content {
       width: 484px;
       margin-right: -30px;
+      @media screen and (max-width: 768px) {
+        width: 100%;
+        margin-right: 0;
+      }
       .title {
         font-size: 85px;
         font-family: Chinese Rocks-Regular, Chinese Rocks;
@@ -139,6 +186,11 @@ const handleChange = (index: number) => {
         line-height: 100px;
         text-align: center;
         margin: 110px 0 44px;
+        @media screen and (max-width: 768px) {
+          margin: 0;
+          font-size: 32px;
+          line-height: 38px;
+        }
       }
       .desc {
         font-size: 20px;
@@ -147,11 +199,20 @@ const handleChange = (index: number) => {
         color: #101010;
         line-height: 35px;
         min-height: 280px;
+        @media screen and (max-width: 768px) {
+          font-size: 12px;
+          line-height: 21px;
+          padding: 0 48px;
+          min-height: 180px;
+        }
       }
       .indicators {
         display: flex;
         justify-content: center;
         margin-top: 80px;
+        @media screen and (max-width: 768px) {
+          margin-top: 20px;
+        }
         .indicator {
           width: 20px;
           height: 20px;
@@ -159,17 +220,31 @@ const handleChange = (index: number) => {
           background: rgba(0, 0, 0, 0.3);
           margin: 0 15px;
           cursor: pointer;
+          @media screen and (max-width: 768px) {
+            width: 6px;
+            height: 6px;
+            margin: 0 5px;
+          }
           &.active {
             width: 36px;
             background: #000;
             border-radius: 10px 10px 10px 10px;
+            @media screen and (max-width: 768px) {
+              width: 12px;
+              height: 6px;
+              border-radius: 3px 3px 3px 3px;
+            }
           }
         }
       }
     }
     img {
       width: 660px;
-      height: 668px;
+      /* height: 668px; */
+      @media screen and (max-width: 768px) {
+        width: 240px;
+        margin: 55px auto 0;
+      }
     }
   }
 }

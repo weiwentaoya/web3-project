@@ -23,5 +23,8 @@ import ContactUs from '@/components/home/contactUs.vue'
   background: url(/src/assets/images/home/bg.png) no-repeat;
   background-size: 100% 140vh;
   padding-top: 76px;
+  @media screen and (max-width: 768px) {
+    padding-top: 10px;
+  }
 }
 </style>

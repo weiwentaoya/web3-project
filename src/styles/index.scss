@@ -6,19 +6,35 @@ body, html {
   min-height: 100vh;
   min-width: 1400px;
   background: #000;
+  @media screen and (max-width: 768px) {
+    min-width: 100%;
+  }
 }
 
 .w1400 {
   width: 1400px;
   margin: 0 auto;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0 12px;
+  }
+
 }
 
 .w1200 {
   width: 1200px;
   margin: 0 auto;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 0 12px;
+  }
 }
 
 @font-face {
   font-family: 'Chinese Rocks';
   src: url('../assets/font/chinese-rocks-rg.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Resident Evil';
+  src: url('../assets/font/resident_evil_7.otf') format('truetype');
 }

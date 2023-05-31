@@ -44,14 +44,24 @@ const projectList = ref([
 <style scoped lang="scss">
 .claim-project {
   margin-top: 78px;
+  @media screen and (max-width: 768px) {
+    margin-top: 20px;
+  }
   .project-list {
     padding-bottom: 78px;
+    @media screen and (max-width: 768px) {
+      padding-bottom: 30px;
+    }
     .name {
       font-size: 25px;
       font-family: Archivo-Black, Archivo;
       font-weight: 900;
       color: #ffffff;
       line-height: 44px;
+      @media screen and (max-width: 768px) {
+        font-size: 16px;
+        line-height: 28px;
+      }
     }
     .c-s {
       display: flex;
@@ -61,21 +71,39 @@ const projectList = ref([
       color: #ffffff;
       line-height: 35px;
       margin-top: 20px;
+      @media screen and (max-width: 768px) {
+        font-size: 14px;
+        line-height: 24px;
+        justify-content: space-between;
+      }
       .sale {
         margin-left: 60px;
+        @media screen and (max-width: 768px) {
+          margin-left: 0px;
+        }
       }
     }
     .detalis {
       display: flex;
       margin-top: 38px;
+      @media screen and (max-width: 768px) {
+        margin-top: 20px;
+        flex-direction: column;
+      }
       .img {
         width: 394px;
         height: 394px;
         background: #d9d9d9;
+        @media screen and (max-width: 768px) {
+          width: 100%;
+        }
       }
       .detalis-content {
         flex: 1;
         padding: 54px 70px;
+        @media screen and (max-width: 768px) {
+          padding: 26px 8px;
+        }
         .title {
           margin-top: 16px;
           font-size: 25px;
@@ -83,6 +111,9 @@ const projectList = ref([
           font-weight: 900;
           color: #ffffff;
           line-height: 44px;
+          @media screen and (max-width: 768px) {
+            margin-top: 26px;
+          }
         }
         .desc {
           font-size: 18px;
@@ -91,6 +122,10 @@ const projectList = ref([
           color: #ffffff;
           line-height: 34px;
           margin-top: 18px;
+          @media screen and (max-width: 768px) {
+            font-size: 16px;
+            line-height: 30px;
+          }
         }
       }
     }
@@ -98,6 +133,9 @@ const projectList = ref([
       margin: 78px auto 0;
       width: 329px;
       cursor: pointer;
+      @media screen and (max-width: 768px) {
+        margin: 30px auto 0;
+      }
       img {
         width: 100%;
       }
