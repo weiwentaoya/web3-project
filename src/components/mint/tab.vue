@@ -32,6 +32,8 @@ const props = defineProps(['init'])
     text-transform: uppercase;
     // 字体下划线
     text-decoration: none;
+    background: url(../../assets/images/mint/Rectangle2@2x.webp) 100% no-repeat;
+    background-size: 100% 100%;
     @media screen and (max-width: 768px) {
       width: 50%;
       height: 45px;

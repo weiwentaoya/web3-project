@@ -86,6 +86,8 @@ const projectList = ref([
     .detalis {
       display: flex;
       margin-top: 38px;
+      background: url(../../assets/images/mint/Rectangle4@2x.webp) 100% no-repeat;
+      background-size: 100% 100%;
       @media screen and (max-width: 768px) {
         margin-top: 20px;
         flex-direction: column;

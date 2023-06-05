@@ -40,7 +40,6 @@
     img {
       width: 581px;
       height: 141px;
-      margin-top: 60px;
       @media screen and (max-width: 768px) {
         width: 100%;
         margin-top: -38px;
@@ -49,7 +48,9 @@
     .img1 {
       opacity: 1;
       height: initial;
+      margin-top: 60px;
       @media screen and (max-width: 768px) {
+        margin-top: 0px;
         opacity: 0;
         height: 0;
       }
@@ -57,13 +58,15 @@
     .img2 {
       opacity: 0;
       height: 0;
+      margin-top: 0px;
       @media screen and (max-width: 768px) {
+        margin-top: 60px;
         opacity: 1;
         height: initial;
       }
     }
     p {
-      padding: 32px 18px 0 30px;
+      padding: 30px 18px 0 30px;
       font-size: 20px;
       font-family: Archivo-Regular, Archivo;
       font-weight: 400;

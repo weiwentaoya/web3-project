@@ -26,10 +26,10 @@
 
 <script setup lang="ts">
 import path1 from '@/assets/images/home/image21@2x.webp'
-import path2 from '@/assets/images/home/image22@2x.webp'
-import path3 from '@/assets/images/home/image23@2x.webp'
-import path4 from '@/assets/images/home/image24@2x.webp'
-import path5 from '@/assets/images/home/image25@2x.webp'
+import path2 from '@/assets/images/home/image46@2x.webp'
+import path3 from '@/assets/images/home/image47@2x.webp'
+import path4 from '@/assets/images/home/image48@2x.webp'
+import path5 from '@/assets/images/home/image49@2x.webp'
 const dataList = [
   {
     id: 1,
@@ -150,7 +150,9 @@ const dataList = [
           margin-right: 0;
         }
         .photo {
-          width: 100px;
+          width: 118px;
+          object-fit: contain;
+          height: 118px;
           margin: 55px auto 0;
         }
         .time {

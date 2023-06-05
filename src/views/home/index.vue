@@ -1,11 +1,13 @@
 <template>
   <div class="home-page__wrap">
     <Header />
-    <Banner />
-    <About />
-    <Land />
-    <RoadMap />
-    <ContactUs />
+    <div class="home-page__content">
+      <Banner />
+      <About />
+      <Land />
+      <RoadMap />
+      <ContactUs />
+    </div>
   </div>
 </template>
 
@@ -20,11 +22,15 @@ import ContactUs from '@/components/home/contactUs.vue'
 
 <style scoped lang="scss">
 .home-page__wrap {
+  padding-top: 76px;
   background: url(/src/assets/images/home/bg.webp) no-repeat;
   background-size: 100% 140vh;
-  padding-top: 76px;
   @media screen and (max-width: 768px) {
     padding-top: 10px;
+  }
+  .home-page__content {
+    background: url(/src/assets/images/home/Group24@2x.webp) no-repeat;
+    background-size: 100% 100%;
   }
 }
 </style>
