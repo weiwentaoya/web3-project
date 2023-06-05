@@ -1,7 +1,7 @@
 <template>
   <div class="header-nav">
     <div class="header-nav__home">
-      <img src="../../assets/images/home/image 30@2x.png" alt="" />
+      <img src="../../assets/images/home/image30@2x.png" alt="" />
     </div>
     <div class="header-nav__page" v-show="navShow" @click="handleSwitch(false)">
       <div class="close">
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="header-nav__buy">
-      <img src="../../assets/images/home/Group 1@2x.png" alt="" />
+      <img src="../../assets/images/home/Group1@2x.png" alt="" />
       <SvgIcon
         @click="navShow = true"
         class="nav"
@@ -113,7 +113,7 @@ onMounted(() => {
     navShow.value = true
   }
 })
-const handleSwitch = (val) => {
+const handleSwitch = (val: boolean) => {
   if (isM.value) {
     navShow.value = val
   }

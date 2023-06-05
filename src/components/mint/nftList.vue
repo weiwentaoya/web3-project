@@ -17,7 +17,7 @@
         <div class="child-item"></div>
       </div>
       <div class="ntf-list__mint-now">
-        <img src="../../assets/images/mint/Group 32@2x.png" alt="" />
+        <img src="../../assets/images/mint/Group32@2x.png" alt="" />
       </div>
     </div>
   </div>

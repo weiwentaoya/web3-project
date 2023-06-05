@@ -19,7 +19,7 @@
               class="indicator"
               :class="indicators === index ? 'active' : ''"
               v-for="(item, index) in dataList"
-              :key="item"
+              :key="item.id"
               @click="carousel.setActiveItem(index)"
             ></div>
           </div>
@@ -29,14 +29,14 @@
       <div class="arrow-l">
         <img
           @click="carousel.prev()"
-          src="../../assets/images/home/Group 216@2x.png"
+          src="../../assets/images/home/Group216@2x.png"
           alt=""
         />
       </div>
       <div class="arrow-r">
         <img
           @click="carousel.next()"
-          src="../../assets/images/home/Group 215@2x.png"
+          src="../../assets/images/home/Group215@2x.png"
           alt=""
         />
       </div>
@@ -49,13 +49,13 @@ import { onMounted, ref } from 'vue'
 import { useWindowSize } from '@vueuse/core'
 const { width } = useWindowSize()
 
-const carousel = ref(null)
-import path1 from '@/assets/images/home/Group 17@2x.png'
-import path2 from '@/assets/images/home/Group 17@2x(1).png'
-import path3 from '@/assets/images/home/Group 17@2x(2).png'
-import path4 from '@/assets/images/home/Group 17@2x(3).png'
-import path5 from '@/assets/images/home/Group 17@2x(4).png'
-import path6 from '@/assets/images/home/Group 17@2x(5).png'
+const carousel = ref()
+import path1 from '@/assets/images/home/Group17@2x.png'
+import path2 from '@/assets/images/home/Group17@2x(1).png'
+import path3 from '@/assets/images/home/Group17@2x(2).png'
+import path4 from '@/assets/images/home/Group17@2x(3).png'
+import path5 from '@/assets/images/home/Group17@2x(4).png'
+import path6 from '@/assets/images/home/Group17@2x(5).png'
 const dataList = [
   {
     id: 1,

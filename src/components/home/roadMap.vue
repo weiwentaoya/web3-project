@@ -25,11 +25,11 @@
 </template>
 
 <script setup lang="ts">
-import path1 from '@/assets/images/home/image 21@2x.png'
-import path2 from '@/assets/images/home/image 22@2x.png'
-import path3 from '@/assets/images/home/image 23@2x.png'
-import path4 from '@/assets/images/home/image 24@2x.png'
-import path5 from '@/assets/images/home/image 25@2x.png'
+import path1 from '@/assets/images/home/image21@2x.png'
+import path2 from '@/assets/images/home/image22@2x.png'
+import path3 from '@/assets/images/home/image23@2x.png'
+import path4 from '@/assets/images/home/image24@2x.png'
+import path5 from '@/assets/images/home/image25@2x.png'
 const dataList = [
   {
     id: 1,

@@ -2,8 +2,8 @@
   <div class="home-page__about w1400" id="about">
     <img class="about-l" src="../../assets/images/home/about.png" alt="" />
     <div class="about-r">
-      <img class="img1" src="../../assets/images/home/Group 22@2x.png" alt="" />
-      <img class="img2" src="../../assets/images/home/Group 22@2x2.png" />
+      <img class="img1" src="../../assets/images/home/Group22@2x.png" alt="" />
+      <img class="img2" src="../../assets/images/home/Group22@2x2.png" />
       <p>
         XX is an NFT publishing platform, and this is an introduction to our
         team.XX is an NFT publishing platform, and this is an introduction to
