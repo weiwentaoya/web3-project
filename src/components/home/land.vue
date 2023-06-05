@@ -179,13 +179,14 @@ const handleResize = () => {
         margin-right: 0;
       }
       .title {
-        font-size: 85px;
+        font-size: 65px;
         font-family: Chinese Rocks-Regular, Chinese Rocks;
         font-weight: 400;
         color: #560404;
         line-height: 100px;
         text-align: center;
         margin: 110px 0 44px;
+        text-transform: uppercase;
         @media screen and (max-width: 768px) {
           margin: 0;
           font-size: 32px;
