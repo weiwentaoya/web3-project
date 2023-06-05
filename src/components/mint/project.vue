@@ -14,7 +14,7 @@
         </div>
       </div>
       <div class="project-list__btn">
-        <img src="../../assets/images/mint/Group214@2x.png" alt="" />
+        <img src="../../assets/images/mint/Group214@2x.webp" alt="" />
       </div>
     </div>
   </div>

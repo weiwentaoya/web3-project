@@ -39,7 +39,7 @@ const props = defineProps(['init'])
     }
   }
   .active {
-    background: url(../../assets/images/mint/tab-bg.png) 100% no-repeat;
+    background: url(../../assets/images/mint/tab-bg.webp) 100% no-repeat;
     background-size: 100% 100%;
   }
 }

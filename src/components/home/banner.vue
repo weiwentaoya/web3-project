@@ -1,10 +1,10 @@
 <template>
   <div class="home-page__banner" id="banner">
     <div class="banner-container w1400">
-      <img class="banner" src="../../assets/images/home/banner.png" alt="" />
+      <img class="banner" src="../../assets/images/home/banner.webp" alt="" />
       <!-- <img
         class="name"
-        src="../../assets/images/home/ProjectName@2x.png"
+        src="../../assets/images/home/ProjectName@2x.webp"
         alt=""
       /> -->
       <div class="name">ProjectName</div>

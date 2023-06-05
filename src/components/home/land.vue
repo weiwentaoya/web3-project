@@ -29,14 +29,14 @@
       <div class="arrow-l">
         <img
           @click="carousel.prev()"
-          src="../../assets/images/home/Group216@2x.png"
+          src="../../assets/images/home/Group216@2x.webp"
           alt=""
         />
       </div>
       <div class="arrow-r">
         <img
           @click="carousel.next()"
-          src="../../assets/images/home/Group215@2x.png"
+          src="../../assets/images/home/Group215@2x.webp"
           alt=""
         />
       </div>
@@ -50,12 +50,12 @@ import { useWindowSize } from '@vueuse/core'
 const { width } = useWindowSize()
 
 const carousel = ref()
-import path1 from '@/assets/images/home/Group17@2x.png'
-import path2 from '@/assets/images/home/Group17@2x(1).png'
-import path3 from '@/assets/images/home/Group17@2x(2).png'
-import path4 from '@/assets/images/home/Group17@2x(3).png'
-import path5 from '@/assets/images/home/Group17@2x(4).png'
-import path6 from '@/assets/images/home/Group17@2x(5).png'
+import path1 from '@/assets/images/home/Group17@2x.webp'
+import path2 from '@/assets/images/home/Group17@2x(1).webp'
+import path3 from '@/assets/images/home/Group17@2x(2).webp'
+import path4 from '@/assets/images/home/Group17@2x(3).webp'
+import path5 from '@/assets/images/home/Group17@2x(4).webp'
+import path6 from '@/assets/images/home/Group17@2x(5).webp'
 const dataList = [
   {
     id: 1,
@@ -116,11 +116,11 @@ const handleResize = () => {
 <style scoped lang="scss">
 .home-page__land {
   margin-top: 86px;
-  background: url(../../assets/images/home/land-bg.png) 100% no-repeat;
+  background: url(../../assets/images/home/land-bg.webp) 100% no-repeat;
   background-size: 100% 100%;
   @media screen and (max-width: 768px) {
     margin-top: 80px;
-    background: url(../../assets/images/home/land-bg2.png) 100% no-repeat;
+    background: url(../../assets/images/home/land-bg2.webp) 100% no-repeat;
     background-size: 100% 100%;
   }
   .arrow-l {

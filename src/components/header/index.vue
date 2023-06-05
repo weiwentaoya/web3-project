@@ -1,7 +1,7 @@
 <template>
   <div class="header-nav">
     <div class="header-nav__home">
-      <img src="../../assets/images/home/image30@2x.png" alt="" />
+      <img src="../../assets/images/home/image30@2x.webp" alt="" />
     </div>
     <div class="header-nav__page" v-show="navShow" @click="handleSwitch(false)">
       <div class="close">
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="header-nav__buy">
-      <img src="../../assets/images/home/Group1@2x.png" alt="" />
+      <img src="../../assets/images/home/Group1@2x.webp" alt="" />
       <SvgIcon
         @click="navShow = true"
         class="nav"
@@ -239,7 +239,7 @@ const handleScroll = throttle(() => {
         }
       }
       .active {
-        background: url(../../assets/images/home/nav-bg.png) 100% no-repeat;
+        background: url(../../assets/images/home/nav-bg.webp) 100% no-repeat;
         background-size: 100% 100%;
       }
     }

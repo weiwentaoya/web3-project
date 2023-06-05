@@ -20,7 +20,7 @@ import ContactUs from '@/components/home/contactUs.vue'
 
 <style scoped lang="scss">
 .home-page__wrap {
-  background: url(/src/assets/images/home/bg.png) no-repeat;
+  background: url(/src/assets/images/home/bg.webp) no-repeat;
   background-size: 100% 140vh;
   padding-top: 76px;
   @media screen and (max-width: 768px) {

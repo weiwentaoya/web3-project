@@ -7,7 +7,7 @@
         <div class="item" v-for="item in dataList" :key="item.id">
           <img
             class="item-line"
-            src="../../assets/images/home/road-map-line.png"
+            src="../../assets/images/home/road-map-line.webp"
             alt=""
           />
           <img class="photo" :src="item.path" alt="" />
@@ -25,11 +25,11 @@
 </template>
 
 <script setup lang="ts">
-import path1 from '@/assets/images/home/image21@2x.png'
-import path2 from '@/assets/images/home/image22@2x.png'
-import path3 from '@/assets/images/home/image23@2x.png'
-import path4 from '@/assets/images/home/image24@2x.png'
-import path5 from '@/assets/images/home/image25@2x.png'
+import path1 from '@/assets/images/home/image21@2x.webp'
+import path2 from '@/assets/images/home/image22@2x.webp'
+import path3 from '@/assets/images/home/image23@2x.webp'
+import path4 from '@/assets/images/home/image24@2x.webp'
+import path5 from '@/assets/images/home/image25@2x.webp'
 const dataList = [
   {
     id: 1,
@@ -90,7 +90,7 @@ const dataList = [
     width: 1030px;
     margin: 0 auto;
     height: 69px;
-    background: url(../../assets/images/home/road-map-title-bg.png) 100%
+    background: url(../../assets/images/home/road-map-title-bg.webp) 100%
       no-repeat;
     background-size: 100% 100%;
     @media screen and (max-width: 768px) {
@@ -103,7 +103,7 @@ const dataList = [
   .line {
     margin-top: 45px;
     height: 1px;
-    background: url(../../assets/images/home/line.png) 100% no-repeat;
+    background: url(../../assets/images/home/line.webp) 100% no-repeat;
     background-size: 100% 100%;
     @media screen and (max-width: 768px) {
       display: none;
@@ -127,7 +127,7 @@ const dataList = [
         align-items: center;
         width: 275px;
         height: 430px;
-        background: url(../../assets/images/home/road-map-bg.png) 100% no-repeat;
+        background: url(../../assets/images/home/road-map-bg.webp) 100% no-repeat;
         background-size: 100% 100%;
         margin-right: 15px;
         position: relative;
