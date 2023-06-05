@@ -27,6 +27,7 @@ import ContactUs from '@/components/home/contactUs.vue'
   background-size: 100% 140vh;
   @media screen and (max-width: 768px) {
     padding-top: 10px;
+    background-size: 100% 75vh;
   }
   .home-page__content {
     background: url(/src/assets/images/home/Group24@2x.webp) no-repeat;

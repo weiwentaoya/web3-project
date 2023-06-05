@@ -14,7 +14,7 @@
   text-align: center;
   margin-top: 78px;
   @media screen and (max-width: 768px) {
-    margin-top: 88px;
+    margin-top: 68px;
   }
   .title {
     font-size: 50px;

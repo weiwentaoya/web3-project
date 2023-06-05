@@ -42,7 +42,6 @@
       height: 141px;
       @media screen and (max-width: 768px) {
         width: 100%;
-        margin-top: -38px;
       }
     }
     .img1 {
@@ -58,9 +57,9 @@
     .img2 {
       opacity: 0;
       height: 0;
-      margin-top: 0px;
+      margin-top: 0;
       @media screen and (max-width: 768px) {
-        margin-top: 60px;
+        margin-top: -38px;
         opacity: 1;
         height: initial;
       }
