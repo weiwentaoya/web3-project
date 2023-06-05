@@ -12,7 +12,7 @@
 <style scoped lang="scss">
 .home-page__contact {
   text-align: center;
-  margin-top: 248px;
+  margin-top: 78px;
   @media screen and (max-width: 768px) {
     margin-top: 88px;
   }
@@ -54,7 +54,7 @@
     font-weight: 400;
     color: #ffffff;
     line-height: 24px;
-    padding-bottom: 110px;
+    padding-bottom: 60px;
     @media screen and (max-width: 768px) {
       margin-top: 22px;
       font-size: 12px;
