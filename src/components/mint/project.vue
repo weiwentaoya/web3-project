@@ -119,7 +119,7 @@ const projectList = ref([
         }
         .desc {
           font-size: 18px;
-          font-family: Archivo-Regular, Archivo;
+          font-family: Montserrat;
           font-weight: 400;
           color: #ffffff;
           line-height: 34px;

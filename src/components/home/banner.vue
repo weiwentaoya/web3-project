@@ -56,7 +56,7 @@
     }
     &__desc {
       font-size: 25px;
-      font-family: Archivo-Regular, Archivo;
+      font-family: Montserrat;
       font-weight: 400;
       color: #fff;
       line-height: 44px;

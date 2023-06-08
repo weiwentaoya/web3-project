@@ -166,7 +166,7 @@ const dataList = [
         }
         .desc {
           font-size: 12px;
-          font-family: Archivo-Regular, Archivo;
+          font-family: Montserrat;
           font-weight: 400;
           color: #fff;
           line-height: 21px;

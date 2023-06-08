@@ -67,7 +67,7 @@
     p {
       padding: 30px 18px 0 30px;
       font-size: 20px;
-      font-family: Archivo-Regular, Archivo;
+      font-family: Montserrat;
       font-weight: 400;
       color: #ffffff;
       line-height: 35px;

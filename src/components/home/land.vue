@@ -115,11 +115,11 @@ const handleResize = () => {
 
 <style scoped lang="scss">
 .home-page__land {
-  margin-top: 86px;
+  margin-top: 143px;
   background: url(../../assets/images/home/land-bg.webp) 100% no-repeat;
   background-size: 100% 100%;
   @media screen and (max-width: 768px) {
-    margin-top: 80px;
+    margin-top: 50px;
     background: url(../../assets/images/home/land-bg2.webp) 100% no-repeat;
     background-size: 100% 100%;
   }
@@ -195,7 +195,7 @@ const handleResize = () => {
       }
       .desc {
         font-size: 20px;
-        font-family: Archivo-Regular, Archivo;
+        font-family: Montserrat;
         font-weight: 400;
         color: #101010;
         line-height: 35px;

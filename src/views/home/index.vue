@@ -4,6 +4,7 @@
     <div class="home-page__content">
       <Banner />
       <About />
+      <Tokenomics />
       <Land />
       <RoadMap />
       <ContactUs />
@@ -15,6 +16,7 @@
 import Header from '@/components/header/index.vue'
 import Banner from '@/components/home/banner.vue'
 import About from '@/components/home/about.vue'
+import Tokenomics from '@/components/home/tokenomics.vue'
 import Land from '@/components/home/land.vue'
 import RoadMap from '@/components/home/roadMap.vue'
 import ContactUs from '@/components/home/contactUs.vue'
