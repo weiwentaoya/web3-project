@@ -14,13 +14,14 @@ import NftList from '@/components/mint/nftList.vue'
 import Footer from '@/components/mint/footer.vue'
 import { onMounted, ref } from 'vue'
 import { getNftSetList, getNftTokenList, getNftDetail } from '@/api/nft'
-import { NftSet, NftToken } from '@/api/nft/type'
+import { NftSet, NFTDETAIL } from '@/api/nft/type'
 
-const nftSetList = ref<NftSet[]>([])
+const nftSet = ref<NftSet[]>([])
+const nftSetList = ref<any>([])
 onMounted(async () => {
   const res = await getNftSetList()
-  nftSetList.value = res.nftSetList
-  nftSetList.value.forEach((item) => {
+  nftSet.value = res.data.nftSetList
+  nftSet.value.forEach((item) => {
     itemFill(item)
   })
 })
@@ -31,13 +32,15 @@ const itemFill = async (item: NftSet) => {
     offset: 0,
     limit: 6,
   }
-  const [{ nftTokenList }, detail] = await Promise.all([
+  const [token, detail] = await Promise.all([
     getNftTokenList(params),
     getNftDetail({ nftSetId: item.nftSetId }),
   ])
-  item.nftTokenList = nftTokenList
-  Object.assign(item, detail)
-  console.log(item)
+  const o: NFTDETAIL = Object.assign({}, item, {
+    ...detail.data,
+    nftTokenList: token.data.nftTokenList,
+  })
+  nftSetList.value.push(o)
 }
 </script>
 

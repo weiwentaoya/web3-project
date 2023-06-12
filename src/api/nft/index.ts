@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import * as types from './types'
+import * as types from './type'
 enum API {
   NFTSETLIST = '/v1/nft_set_list',
   TOKENLIST = '/v1/nft_token_list',

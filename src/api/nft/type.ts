@@ -12,10 +12,8 @@ export interface NftSet {
 }
 
 export interface ResponseNFTSETLIST extends ResponseData {
-  data: {
-    totalCount: number
-    nftSetList: NftSet[]
-  }
+  totalCount: number
+  nftSetList: NftSet[]
 }
 
 export interface NftToken {
@@ -27,19 +25,17 @@ export interface NftToken {
 }
 
 export interface ResponseNFTTOKEN extends ResponseData {
-  data: {
-    totalCount: number
-    nftTokenList: NftToken[]
-  }
+  totalCount?: number
+  nftTokenList: NftToken[]
 }
 export interface ResponseNFTSETDETAIL extends ResponseData {
-  data: {
-    nftSetId: number
-    nftSetName: string
-    contractAddress: string
-    totalSupply: number
-    lastHourMintCount: number
-    mintPrice: number
-    nftDetail: string
-  }
+  nftSetId: number
+  nftSetName: string
+  contractAddress: string
+  totalSupply: number
+  lastHourMintCount: number
+  mintPrice: number
+  nftDetail: string
 }
+
+export interface NFTDETAIL extends ResponseNFTSETDETAIL, ResponseNFTTOKEN {}

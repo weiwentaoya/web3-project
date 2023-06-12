@@ -1,6 +1,10 @@
 import Web3 from 'web3'
 import { ElMessage } from 'element-plus'
-
+declare global {
+  interface Window {
+    ethereum?: any
+  }
+}
 class Mm {
   userAdderss: string | undefined // 用户地址
   recipientAddress: string | undefined // 收款人地址

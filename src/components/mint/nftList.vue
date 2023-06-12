@@ -2,9 +2,15 @@
   <div class="w1200">
     <div class="ntf-list" v-for="item in props.nftSetList" :key="item.nftSetId">
       <div class="ntf-list__name">{{ item.nftSetName }}</div>
-      <div class="ntf-list__desc">{{ item.lastHourMintCount }} mints last hr</div>
+      <div class="ntf-list__desc">
+        {{ item.lastHourMintCount }} mints last hr
+      </div>
       <div class="ntf-list__child">
-        <div v-for="child in item.nftTokenList" :key="child.tokenId" class="child-item">
+        <div
+          v-for="child in item.nftTokenList"
+          :key="child.tokenId"
+          class="child-item"
+        >
           <div class="img">
             <img :src="child.tokenImage" />
           </div>
@@ -27,17 +33,16 @@
 </template>
 
 <script setup lang="ts">
-import { NftSet } from '@/api/nft/type'
-import { ref, defineProps } from 'vue'
 import NftDialog from './nftDialog.vue'
-const props = defineProps({
-  nftSetList: {
-    type: Array,
-    required: true,
-  },
-})
+import { ref, defineProps } from 'vue'
+import { NFTDETAIL } from '@/api/nft/type'
+
+interface Props {
+  nftSetList: any[]
+}
+const props = defineProps<Props>()
 const nft = ref()
-const handleMint = (item: NftSet) => {
+const handleMint = (item: NFTDETAIL) => {
   nft.value.handleOpen(item)
 }
 </script>

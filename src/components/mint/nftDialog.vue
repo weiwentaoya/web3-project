@@ -5,7 +5,7 @@
     :lock-scroll="true"
     class="nft-dialog"
   >
-    <template #header="{ close }">
+    <template #header>
       <div class="nft-dialog__header">
         <div class="title">MintingNow</div>
         <!-- <SvgIcon
@@ -20,8 +20,8 @@
     </template>
     <div class="nft-dialog__content">
       <div>
-        <div class="name">{{ nft.nftSetName }}</div>
-        <div class="hour">{{ nft.lastHourMintCount }} mints last hr</div>
+        <div class="name">{{ nft?.nftSetName }}</div>
+        <div class="hour">{{ nft?.lastHourMintCount }} mints last hr</div>
         <img
           @click="handleMint"
           class="mint"
@@ -33,10 +33,10 @@
     </div>
     <div class="nft-dialog__mints">
       <div class="name">Recent Mints</div>
-      <div class="hour">{{ nft.lastHourMintCount }} mints last hr</div>
+      <div class="hour">{{ nft?.lastHourMintCount }} mints last hr</div>
       <div class="list">
         <div
-          v-for="child in nft.nftTokenList"
+          v-for="child in nft?.nftTokenList"
           :key="child.tokenId"
           class="item"
         >
@@ -93,16 +93,16 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { NFTDETAIL } from '@/api/nft/type'
 import Mm from './useMm'
 const dialogVisible = ref(false)
 const loginVisible = ref(false)
-const nft = ref(null)
-
+const nft = ref<NFTDETAIL>()
 const handleClose = (done: () => void) => {
   done()
 }
 const MM = Mm.getInstance()
-const handleOpen = (item) => {
+const handleOpen = (item: NFTDETAIL) => {
   nft.value = item
   dialogVisible.value = true
   // console.log(Mm.instance)

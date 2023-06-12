@@ -18,7 +18,7 @@ request.interceptors.request.use((config) => {
 request.interceptors.response.use(
   (response) => {
     if (response.data?.code === 0) {
-      return response.data.data
+      return response.data
     }
     ElMessage({
       type: 'warning',
