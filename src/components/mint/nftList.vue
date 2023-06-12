@@ -1,14 +1,16 @@
 <template>
   <div class="w1200">
-    <div class="ntf-list" v-for="item in nftList" :key="item.id">
-      <div class="ntf-list__name">{{ item.name }}</div>
-      <div class="ntf-list__desc">{{ item.desc }}</div>
+    <div class="ntf-list" v-for="item in props.nftSetList" :key="item.nftSetId">
+      <div class="ntf-list__name">{{ item.nftSetName }}</div>
+      <div class="ntf-list__desc">{{ item.lastHourMintCount }} mints last hr</div>
       <div class="ntf-list__child">
-        <div v-for="child in item.children" :key="child.id" class="child-item">
-          <div class="img"></div>
-          <div class="price">{{ child.price }}</div>
-          <div class="desc">{{ child.desc }}</div>
-          <div class="free">{{ child.free }}</div>
+        <div v-for="child in item.nftTokenList" :key="child.tokenId" class="child-item">
+          <div class="img">
+            <img :src="child.tokenImage" />
+          </div>
+          <div class="price">{{ child.tokenMintedTime }}</div>
+          <div class="desc">Minted by {{ child.tokenOwnerAddress }}</div>
+          <!-- <div class="free">{{ child.free }}</div> -->
         </div>
         <div class="child-item"></div>
         <div class="child-item"></div>
@@ -16,116 +18,28 @@
         <div class="child-item"></div>
         <div class="child-item"></div>
       </div>
-      <div class="ntf-list__mint-now">
+      <div class="ntf-list__mint-now" @click="handleMint(item)">
         <img src="../../assets/images/mint/Group32@2x.webp" alt="" />
       </div>
     </div>
+    <NftDialog ref="nft" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const nftList = ref([
-  {
-    id: '1',
-    name: 'Set 1 NFT Name',
-    desc: '1,893 mints last hr',
-    children: [
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-    ],
+import { NftSet } from '@/api/nft/type'
+import { ref, defineProps } from 'vue'
+import NftDialog from './nftDialog.vue'
+const props = defineProps({
+  nftSetList: {
+    type: Array,
+    required: true,
   },
-  {
-    id: '2',
-    name: 'Set 2 NFT Name',
-    desc: '1,893 mints last hr',
-    children: [
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-      {
-        id: '1-1',
-        price: '# 90,989',
-        desc: 'Minted by 0x1ca255',
-        free: 'FREE • 4m',
-      },
-    ],
-  },
-])
+})
+const nft = ref()
+const handleMint = (item: NftSet) => {
+  nft.value.handleOpen(item)
+}
 </script>
 
 <style scoped lang="scss">
@@ -182,6 +96,10 @@ const nftList = ref([
           padding-right: 10px;
         }
       }
+      .desc {
+        white-space: nowrap;
+        overflow: hidden;
+      }
     }
     .img {
       width: 100%;
@@ -190,6 +108,11 @@ const nftList = ref([
       margin-top: 38px;
       @media screen and (max-width: 768px) {
         margin-top: 30px;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
     .price {

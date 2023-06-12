@@ -17,9 +17,8 @@ request.interceptors.request.use((config) => {
 //响应拦截器
 request.interceptors.response.use(
   (response) => {
-    console.log()
-    if (response.data?.ok) {
-      return response.data
+    if (response.data?.code === 0) {
+      return response.data.data
     }
     ElMessage({
       type: 'warning',
