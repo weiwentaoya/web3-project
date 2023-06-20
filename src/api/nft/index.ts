@@ -4,6 +4,7 @@ enum API {
   NFTSETLIST = '/v1/nft_set_list',
   TOKENLIST = '/v1/nft_token_list',
   NFTSETDETAIL = '/v1/nft_set_detail',
+  NFTMINTPRICE = '/v1/nft_mint_price',
 }
 
 export const getNftSetList = (params?: any) =>
@@ -14,3 +15,6 @@ export const getNftTokenList = (params: any) =>
 
 export const getNftDetail = (params: any) =>
   request.post<types.ResponseNFTSETDETAIL>(API.NFTSETDETAIL, { ...params })
+
+export const getMintPrice = (params: any) =>
+  request.post<types.ResponseMINTPRICE>(API.NFTMINTPRICE, { ...params })

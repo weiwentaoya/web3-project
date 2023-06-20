@@ -8,7 +8,7 @@ declare global {
 }
 class Mm {
   web3: any = null // web3实例
-  userAdderss: string | undefined // 用户地址
+  userAdderss = '' // 用户地址
   error: string | undefined // 错误信息
 
   constructor() {
@@ -63,15 +63,16 @@ class Mm {
     if (this.userAdderss === undefined) {
       return
     }
-    // const amountWei = this.web3.utils.toWei(nft.mintPrice, 'ether')
-    // const toAddress = nft.contractAddress
-    const amountWei = this.web3.utils.toWei('0.00001', 'ether')
-    const toAddress = '0x818DF62ff0bE3B28AE8be25e2e848E10138018B7'
+    const toAddress = nft.contractAddress
+    // const amountWei = this.web3.utils.toWei('0.001', 'ether')
+    // const toAddress = '0x818DF62ff0bE3B28AE8be25e2e848E10138018B7'
+    const contractABI = JSON.parse(atob(nft.contractABI))
+    const contract = new this.web3.eth.Contract(contractABI, toAddress)
+    const methodData = contract.methods.freeMint().encodeABI()
     this.web3.eth
       .sendTransaction({
         from: this.userAdderss,
-        to: toAddress,
-        value: amountWei,
+        data: methodData,
       })
       .on('transactionHash', function (hash: any) {
         console.info(hash)

@@ -39,3 +39,8 @@ export interface ResponseNFTSETDETAIL extends ResponseData {
 }
 
 export interface NFTDETAIL extends ResponseNFTSETDETAIL, ResponseNFTTOKEN {}
+
+export interface ResponseMINTPRICE {
+  allowMint: boolean
+  mintPrice: number
+}

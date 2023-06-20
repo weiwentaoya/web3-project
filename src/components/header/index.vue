@@ -43,7 +43,6 @@
 <script setup lang="ts">
 import { throttle } from '@/utils/index'
 import { useWindowSize } from '@vueuse/core'
-
 const { width } = useWindowSize()
 
 const navList = [
