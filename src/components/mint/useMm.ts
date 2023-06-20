@@ -3,11 +3,12 @@ import { ElMessage } from 'element-plus'
 declare global {
   interface Window {
     ethereum?: any
+    web3?: any
   }
 }
 class Mm {
+  web3: any = null // web3实例
   userAdderss: string | undefined // 用户地址
-  recipientAddress: string | undefined // 收款人地址
   error: string | undefined // 错误信息
 
   constructor() {
@@ -16,51 +17,74 @@ class Mm {
   restart() {
     Mm.getInstance()
   }
-  init() {
+  async init() {
     this.error = undefined
     if (typeof window.ethereum !== 'undefined') {
-      // 您的应用请求MetaMask连接权限
-      window.ethereum
-        .request({ method: 'eth_requestAccounts' })
-        .then((accounts: any) => {
-          // 成功连接后，获取用户地址
-          this.userAdderss = accounts[0]
-        })
-        .catch((error: any) => {
-          console.error('Failed to connect to MetaMask:', error)
-          this.error = error
-        })
+      const res = await window.ethereum.enable()
+      this.userAdderss = res[0]
+
+      this.web3 = new Web3(window.ethereum)
+      // alert('当前钱包地址:' + res[0])
+      this.web3.eth.getAccounts(function (error: any, result: any) {
+        if (!error) console.log(result) //授权成功后result能正常获取到账号了
+      })
     } else {
       this.error = 'MetaMask not found. Please install MetaMask extension.'
       console.error('MetaMask not found. Please install MetaMask extension.')
     }
   }
-  initWeb3(nft: any) {
+  // 查询钱包ETH余额
+  async getBalance() {
     if (this.userAdderss === undefined) {
       return
     }
-    // 初始化Web3实例
-    const web3 = new Web3(window.ethereum)
-    this.recipientAddress = nft.contractAddress // 收款人地址
-    const amountEther = nft.mintPrice // 要发送的以太币数量 (以 Ether 为单位)
-    // 将以太币数量从 Ether 转换为 Wei
-    const amountWei = web3.utils.toWei(amountEther.toString(), 'ether')
-    const transaction = {
-      from: this.userAdderss,
-      to: this.recipientAddress,
-      value: amountWei,
+    const res = await this.web3.eth.getBalance(this.userAdderss)
+    const balance = this.web3.utils.fromWei(res, 'ether')
+    ElMessage.success('当前钱包余额:' + balance)
+  }
+  // 查询代币余额
+  async getEth(nft: any) {
+    const web3: any = new Web3(window.web3.currentProvider)
+    const fromAddress = web3.eth.accounts[0]
+    // '代币合约Abi'
+    const ethContract = web3.eth.contract(nft.contractABI)
+    // '代币合约地址'
+    const functionInstance = ethContract.at(nft.contractAddress)
+    functionInstance.balanceOf(fromAddress, (err: any, res: any) => {
+      if (!err) {
+        //代币精度根据所发行的代币合约精度换算
+        console.log('代币余额==', res.toNumber() / Math.pow(10, 18))
+      }
+    })
+    // ElMessage.success('当前钱包余额:' + balance)
+  }
+  async sendTransaction(nft: any) {
+    console.log(nft)
+    if (this.userAdderss === undefined) {
+      return
     }
-    web3.eth
-      .sendTransaction(transaction)
-      .then((transactionHash) => {
-        console.log('Payment sent, transaction hash:', transactionHash)
-        ElMessage.error('Payment sent, transaction hash:')
+    // const amountWei = this.web3.utils.toWei(nft.mintPrice, 'ether')
+    // const toAddress = nft.contractAddress
+    const amountWei = this.web3.utils.toWei('0.00001', 'ether')
+    const toAddress = '0x818DF62ff0bE3B28AE8be25e2e848E10138018B7'
+    this.web3.eth
+      .sendTransaction({
+        from: this.userAdderss,
+        to: toAddress,
+        value: amountWei,
       })
-      .catch((error) => {
-        console.log('Payment error:', error)
-        // debugger
-        ElMessage.error(error.message)
+      .on('transactionHash', function (hash: any) {
+        console.info(hash)
       })
+      .on('receipt', function (receipt: any) {
+        console.info(receipt)
+      })
+      .on('confirmation', function (confirmationNumber: any, receipt: any) {
+        console.info(confirmationNumber)
+
+        console.info(receipt)
+      })
+      .on('error', console.error)
   }
   static instance: Mm
   static getInstance() {

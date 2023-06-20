@@ -101,17 +101,18 @@ const nft = ref<NFTDETAIL>()
 const handleClose = (done: () => void) => {
   done()
 }
-const MM = Mm.getInstance()
 const handleOpen = (item: NFTDETAIL) => {
   nft.value = item
   dialogVisible.value = true
   // console.log(Mm.instance)
   // console.log(Mm.getInstance())
 }
-const handleMint = () => {
+
+const MM = Mm.getInstance()
+const handleMint = async () => {
   if (!MM.userAdderss || MM.error) return (loginVisible.value = true)
   loginVisible.value = false
-  MM.initWeb3(nft.value)
+  MM.sendTransaction(nft.value)
 }
 defineExpose({
   handleClose,
