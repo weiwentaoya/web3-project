@@ -58,34 +58,42 @@ class Mm {
     })
     // ElMessage.success('当前钱包余额:' + balance)
   }
-  async sendTransaction(nft: any) {
-    console.log(nft)
+  async sendTransaction(
+    nft: any,
+    successFn: (arg0: any) => void,
+    errorFn: (arg0: any) => void,
+  ) {
     if (this.userAdderss === undefined) {
       return
     }
     const toAddress = nft.contractAddress
-    // const amountWei = this.web3.utils.toWei('0.001', 'ether')
-    // const toAddress = '0x818DF62ff0bE3B28AE8be25e2e848E10138018B7'
+    const amountWei = this.web3.utils.toWei(nft.mintPrice * 0.0001, 'ether')
     const contractABI = JSON.parse(atob(nft.contractABI))
     const contract = new this.web3.eth.Contract(contractABI, toAddress)
-    const methodData = contract.methods.freeMint().encodeABI()
+    let methodData
+    if (nft.mintPrice === 0) {
+      methodData = contract.methods.freeMint().encodeABI()
+    } else {
+      methodData = contract.methods.mint().encodeABI()
+    }
     this.web3.eth
       .sendTransaction({
         from: this.userAdderss,
+        to: toAddress,
         data: methodData,
+        value: amountWei,
       })
-      .on('transactionHash', function (hash: any) {
-        console.info(hash)
-      })
-      .on('receipt', function (receipt: any) {
-        console.info(receipt)
-      })
-      .on('confirmation', function (confirmationNumber: any, receipt: any) {
-        console.info(confirmationNumber)
+      .on('transactionHash', successFn)
+      // .on('receipt', function (receipt: any) {
+      //   console.info('receipt', receipt)
+      // })
+      // .on('confirmation', function (confirmationNumber: any, receipt: any) {
+      //   console.info('confirmation', confirmationNumber)
+      //   console.info('confirmation', receipt) // undefined
+      // })
+      .on('error', errorFn)
 
-        console.info(receipt)
-      })
-      .on('error', console.error)
+      .catch(errorFn)
   }
   static instance: Mm
   static getInstance() {

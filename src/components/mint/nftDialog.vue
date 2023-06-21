@@ -89,12 +89,14 @@
       </div>
     </el-dialog>
   </el-dialog>
+  <ViewEtherscan ref="ViewEtherscanRef" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue'
 import { NFTDETAIL } from '@/api/nft/type'
 import Mm from './useMm'
+import ViewEtherscan from './viewEtherscan.vue'
 const dialogVisible = ref(false)
 const loginVisible = ref(false)
 const nft = ref<NFTDETAIL>()
@@ -108,11 +110,20 @@ const handleOpen = (item: NFTDETAIL) => {
   // console.log(Mm.getInstance())
 }
 
+const ViewEtherscanRef = ref()
 const MM = Mm.getInstance()
-const handleMint = async () => {
+const handleMint = () => {
   if (!MM.userAdderss || MM.error) return (loginVisible.value = true)
   loginVisible.value = false
-  MM.sendTransaction(nft.value)
+  MM.sendTransaction(
+    nft.value,
+    (hash) => {
+      ViewEtherscanRef.value.show(hash)
+    },
+    (err) => {
+      console.log(err.message)
+    },
+  )
 }
 defineExpose({
   handleClose,
