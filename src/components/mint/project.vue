@@ -58,13 +58,6 @@ const projectList = ref([
     sale: 'Sale Ends 10d 5h 9m 10s',
     desc: `To commemorate the announcement of Worldcoin launching on Optimism Mainnet, we're releasing this limited edition NFT to add to your collection. Worldcoin and Optimism are committed to realizing a scalable, inclusive future that unlocks the full potential of crypto. Worldcoin's deployment on Optimism and entry into the Superchain are an important milestone in the evolution of identity on the blockchain.`,
   },
-  {
-    id: '1-1',
-    name: 'TokemProjectName',
-    claimed: 'Claimed 89,893',
-    sale: 'Sale Ends 10d 5h 9m 10s',
-    desc: `To commemorate the announcement of Worldcoin launching on Optimism Mainnet, we're releasing this limited edition NFT to add to your collection. Worldcoin and Optimism are committed to realizing a scalable, inclusive future that unlocks the full potential of crypto. Worldcoin's deployment on Optimism and entry into the Superchain are an important milestone in the evolution of identity on the blockchain.`,
-  },
 ])
 </script>
 

@@ -15,8 +15,20 @@
             <img :src="child.tokenImage" />
           </div>
           <div class="price"># {{ child.tokenId }}</div>
-          <div class="desc">Minted by {{ child.tokenOwnerAddress }}</div>
-          <!-- <div class="free">{{ child.free }}</div> -->
+          <div class="desc">
+            Minted by
+            <el-tooltip
+              class="box-item"
+              effect="dark"
+              :content="child.tokenOwnerAddress"
+              placement="top"
+            >
+              {{ child.tokenOwnerAddress.substring(0, 8) }}
+            </el-tooltip>
+          </div>
+          <div class="free">
+            FREE • {{ Math.floor(child.tokenMintedTime / 60) }}m
+          </div>
         </div>
         <div class="child-item"></div>
         <div class="child-item"></div>

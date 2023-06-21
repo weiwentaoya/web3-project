@@ -28,6 +28,10 @@
   .banner-container {
     .banner {
       width: 100%;
+      min-height: 624px;
+      @media screen and (max-width: 768px) {
+        min-height: 168px;
+      }
     }
     .name {
       width: 637px;

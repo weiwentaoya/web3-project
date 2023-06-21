@@ -121,7 +121,7 @@ const dataList = [
         flex-direction: column;
       }
       .item {
-        padding: 0 33px;
+        padding: 0 30px;
         display: flex;
         flex-direction: column;
         align-items: center;

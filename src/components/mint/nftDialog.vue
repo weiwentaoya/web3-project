@@ -29,7 +29,7 @@
           alt=""
         />
       </div>
-      <div class="img"></div>
+      <img class="img" :src="nft?.nftTokenList[0]?.tokenImage" />
     </div>
     <div class="nft-dialog__mints">
       <div class="name">Recent Mints</div>
@@ -42,26 +42,27 @@
         >
           <img :src="child.tokenImage" />
           <div class="price">{{ child.tokenMintedTime }}</div>
-          <div class="desc">Minted by {{ child.tokenOwnerAddress }}</div>
-          <!-- <div class="free">{{ child.free }}</div> -->
+          <div class="desc">
+            Minted by
+            <el-tooltip
+              class="box-item"
+              effect="dark"
+              :content="child.tokenOwnerAddress"
+              placement="top"
+            >
+              {{ child.tokenOwnerAddress.substring(0, 8) }}
+            </el-tooltip>
+          </div>
+          <div class="free">
+            FREE • {{ Math.floor(child.tokenMintedTime / 60) }}m
+          </div>
         </div>
       </div>
     </div>
     <div class="nft-dialog__detalis">
       <div class="title">Detali</div>
       <div class="content">
-        <div>
-          A detailed introduction to this NFT series A detailed introduction to
-          this NFT series
-        </div>
-        <div>
-          A detailed introduction to this NFT series A detailed introduction to
-          this NFT series
-        </div>
-        <div>
-          A detailed introduction to this NFT series A detailed introduction to
-          this NFT series
-        </div>
+        {{ nft?.nftDetail }}
       </div>
     </div>
     <el-dialog
@@ -134,7 +135,7 @@ defineExpose({
 <style lang="scss">
 .nft-dialog {
   width: 1149px;
-  height: 1259px;
+  // height: 1259px;
   box-sizing: border-box;
   padding: 35px 48px;
   background: url(/src/assets/images/mint/dialogbg.webp) no-repeat;
@@ -143,7 +144,7 @@ defineExpose({
   @media screen and (max-width: 768px) {
     width: 354px;
     max-width: 98vw;
-    height: 1704px;
+    // height: 1704px;
     box-sizing: border-box;
     padding: 0;
     background: url(/src/assets/images/mint/dialogbg-m.webp) no-repeat;
@@ -275,20 +276,28 @@ defineExpose({
       }
     }
     .list {
+      margin-top: 38px;
       display: flex;
       overflow: hidden;
       @media screen and (max-width: 768px) {
         flex-wrap: wrap;
         justify-content: space-between;
+        margin-top: 0;
       }
       .item {
         width: 175px;
         margin-right: 30px;
+        font-size: 18px;
+        font-family: Archivo-Medium, Archivo;
+        color: #ffffff;
+        line-height: 32px;
         @media screen and (max-width: 768px) {
           width: 154px;
           margin-right: 0px;
           margin-top: 12px;
           margin-bottom: 12px;
+          font-size: 16px;
+          line-height: 28px;
         }
         img {
           width: 175px;
@@ -301,26 +310,8 @@ defineExpose({
         }
         .price {
           margin-top: 24px;
-          font-size: 18px;
-          font-family: Archivo-Medium, Archivo;
-          color: #ffffff;
-          line-height: 32px;
           @media screen and (max-width: 768px) {
             margin-top: 20px;
-            font-size: 16px;
-            line-height: 28px;
-          }
-        }
-        .desc {
-          font-size: 18px;
-          font-family: Archivo-Medium, Archivo;
-          color: #ffffff;
-          line-height: 32px;
-          white-space: nowrap;
-          overflow: hidden;
-          @media screen and (max-width: 768px) {
-            font-size: 16px;
-            line-height: 28px;
           }
         }
       }
