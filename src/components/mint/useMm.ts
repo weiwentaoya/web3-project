@@ -62,18 +62,26 @@ class Mm {
     nft: any,
     successFn: (arg0: any) => void,
     errorFn: (arg0: any) => void,
+    type: string | undefined = undefined,
   ) {
     if (this.userAdderss === undefined) {
       return
     }
     const toAddress = nft.contractAddress
-    const amountWei = this.web3.utils.toWei(nft.mintPrice * 0.0001, 'ether')
+    const amountWei = nft.mintPrice
+      ? this.web3.utils.toWei(nft.mintPrice * 0.0001, 'ether')
+      : 0
     const contractABI = JSON.parse(atob(nft.contractABI))
     const contract = new this.web3.eth.Contract(contractABI, toAddress)
     let methodData
-    if (nft.mintPrice === 0) {
+    if (type === 'claim') {
+      // 空投合约
+      methodData = contract.methods.claim().encodeABI()
+    } else if (nft.mintPrice === 0) {
+      // 免费mint
       methodData = contract.methods.freeMint().encodeABI()
     } else {
+      // 付费mint
       methodData = contract.methods.mint().encodeABI()
     }
     this.web3.eth

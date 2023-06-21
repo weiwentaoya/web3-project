@@ -44,3 +44,7 @@ export interface ResponseMINTPRICE {
   allowMint: boolean
   mintPrice: number
 }
+export interface airDropContractResponse {
+  contractAddress: number
+  contractABI: number
+}

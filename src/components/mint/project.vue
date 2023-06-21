@@ -13,16 +13,43 @@
           <div class="desc">{{ item.desc }}</div>
         </div>
       </div>
-      <div class="project-list__btn">
+      <div class="project-list__btn" @click="handleClaim">
         <img src="../../assets/images/mint/Group214@2x.webp" alt="" />
       </div>
     </div>
   </div>
+  <ViewEtherscan ref="ViewEtherscanRef" />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import Mm from '@/components/mint/useMm'
+import { airDropContract } from '@/api/nft'
+import { airDropContractResponse } from '@/api/nft/type'
+import ViewEtherscan from './viewEtherscan.vue'
 
+onMounted(() => {
+  getAirDropContract()
+})
+const AirDropContract = ref<airDropContractResponse>()
+const MM = Mm.getInstance()
+const ViewEtherscanRef = ref()
+const getAirDropContract = async () => {
+  const res = await airDropContract()
+  AirDropContract.value = res.data
+}
+const handleClaim = () => {
+  MM.sendTransaction(
+    AirDropContract.value,
+    (hash) => {
+      ViewEtherscanRef.value.show(hash)
+    },
+    (err) => {
+      console.log(err.message)
+    },
+    'claim',
+  )
+}
 const projectList = ref([
   {
     id: '1-1',
@@ -86,7 +113,8 @@ const projectList = ref([
     .detalis {
       display: flex;
       margin-top: 38px;
-      background: url(../../assets/images/mint/Rectangle4@2x.webp) 100% no-repeat;
+      background: url(../../assets/images/mint/Rectangle4@2x.webp) 100%
+        no-repeat;
       background-size: 100% 100%;
       @media screen and (max-width: 768px) {
         margin-top: 20px;

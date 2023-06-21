@@ -14,7 +14,7 @@
           <div class="img">
             <img :src="child.tokenImage" />
           </div>
-          <div class="price">{{ child.tokenMintedTime }}</div>
+          <div class="price"># {{ child.tokenId }}</div>
           <div class="desc">Minted by {{ child.tokenOwnerAddress }}</div>
           <!-- <div class="free">{{ child.free }}</div> -->
         </div>

@@ -4,7 +4,6 @@
     <Tab init="claim" />
     <Project />
     <Footer />
-
   </div>
 </template>
 
@@ -13,7 +12,6 @@ import Header from '@/components/header/index.vue'
 import Tab from '@/components/mint/tab.vue'
 import Project from '@/components/mint/project.vue'
 import Footer from '@/components/mint/footer.vue'
-
 </script>
 
 <style scoped lang="scss">

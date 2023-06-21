@@ -30,9 +30,9 @@ onMounted(async () => {
   nftSet.value = res.data.nftSetList
 
   const MM = Mm.getInstance()
-  if (!MM.userAdderss || MM.error) return
+  // if (!MM.userAdderss || MM.error) return
   nftSet.value.forEach((item) => {
-    itemFill(item, MM.userAdderss)
+    itemFill(item, MM.userAdderss || '')
   })
 })
 
