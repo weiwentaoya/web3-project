@@ -47,4 +47,6 @@ export interface ResponseMINTPRICE {
 export interface airDropContractResponse {
   contractAddress: number
   contractABI: number
+  saleEndTime: number
+  totalClaim: number
 }

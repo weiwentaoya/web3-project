@@ -3,8 +3,10 @@
     <div class="project-list" v-for="item in projectList" :key="item.id">
       <div class="name">{{ item.name }}</div>
       <div class="c-s">
-        <div class="claimed">{{ item.claimed }}</div>
-        <div class="sale">{{ item.sale }}</div>
+        <div class="claimed">Claimed {{ AirDropContract?.totalClaim }}</div>
+        <div class="sale">
+          Sale Ends {{ formatSeconds(AirDropContract?.saleEndTime) }}
+        </div>
       </div>
       <div class="detalis">
         <div class="img"></div>
@@ -19,33 +21,90 @@
     </div>
   </div>
   <ViewEtherscan ref="ViewEtherscanRef" />
+  <Message ref="MessageRef" />
+  <el-dialog
+    v-model="loginVisible"
+    append-to-body
+    :lock-scroll="true"
+    top="25vh"
+    class="login-dialog"
+    width="570px"
+  >
+    <template #header>
+      <div class="login-dialog__header">
+        <div class="title">Login to MetaMask</div>
+      </div>
+    </template>
+    <div class="login-dialog__content">
+      <img
+        src="../../assets/images/mint/dog-head.webp"
+        alt=""
+        @click="handleLogin"
+      />
+      <div class="text">
+        To continue, please login to your MetaMask extension.
+      </div>
+    </div>
+  </el-dialog>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
 import Mm from '@/components/mint/useMm'
 import { airDropContract } from '@/api/nft'
 import { airDropContractResponse } from '@/api/nft/type'
 import ViewEtherscan from './viewEtherscan.vue'
+import Message from './message.vue'
+import { formatSeconds } from '@/utils'
 
-onMounted(() => {
-  getAirDropContract()
-})
 const AirDropContract = ref<airDropContractResponse>()
-const MM = Mm.getInstance()
 const ViewEtherscanRef = ref()
 const getAirDropContract = async () => {
   const res = await airDropContract()
   AirDropContract.value = res.data
 }
+
+let Interval: any = null
+onMounted(() => {
+  getAirDropContract()
+  Interval = setInterval(() => {
+    if (AirDropContract.value) {
+      AirDropContract.value.saleEndTime--
+    }
+  }, 1000)
+})
+onUnmounted(() => {
+  clearInterval(Interval)
+})
+
+const MessageRef = ref()
+const loginVisible = ref(false)
+let MM = Mm.getInstance()
+const handleLogin = () => {
+  MM.init(
+    () => {
+      loginVisible.value = false
+      handleClaim()
+    },
+    (err: string) => {
+      MessageRef.value.show(err)
+    },
+  )
+}
 const handleClaim = () => {
+  if (!MM || !MM.userAdderss || MM.error) return (loginVisible.value = true)
+  loginVisible.value = false
   MM.sendTransaction(
     AirDropContract.value,
     (hash) => {
       ViewEtherscanRef.value.show(hash)
     },
+    () => {
+      console.log('success')
+    },
     (err) => {
       console.log(err.message)
+      MessageRef.value.show(err.message)
     },
     'claim',
   )

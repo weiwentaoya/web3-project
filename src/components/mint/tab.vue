@@ -2,7 +2,7 @@
   <div class="w1200">
     <div class="mint-tabs">
       <router-link :class="props.init === 'mint' ? 'active' : ''" to="/mint">
-        FreeMint
+        {{ route.name === 'free-mint' ? 'FreeMint' : 'Mint' }}
       </router-link>
       <router-link :class="props.init === 'claim' ? 'active' : ''" to="/claim">
         Claim
@@ -12,6 +12,8 @@
 </template>
 
 <script setup lang="ts">
+import { useRoute } from 'vue-router'
+const route = useRoute()
 const props = defineProps(['init'])
 </script>
 

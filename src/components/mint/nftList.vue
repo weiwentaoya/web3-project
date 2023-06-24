@@ -27,7 +27,9 @@
             </el-tooltip>
           </div>
           <div class="free">
-            FREE • {{ Math.floor(child.tokenMintedTime / 60) }}m
+            <!-- FREE •  -->
+            <!-- {{ Math.floor(child.tokenMintedTime / 60) }}m -->
+            {{ formatSeconds(child.tokenMintedTime) }}
           </div>
         </div>
         <div class="child-item"></div>
@@ -36,9 +38,7 @@
         <div class="child-item"></div>
         <div class="child-item"></div>
       </div>
-      <div class="ntf-list__mint-now" @click="handleMint(item)">
-        <img src="../../assets/images/mint/Group32@2x.webp" alt="" />
-      </div>
+      <div class="ntf-list__mint-now" @click="handleMint(item)">Mint Now !</div>
     </div>
     <NftDialog ref="nft" />
   </div>
@@ -48,6 +48,7 @@
 import NftDialog from './nftDialog.vue'
 import { ref, defineProps } from 'vue'
 import { NFTDETAIL } from '@/api/nft/type'
+import { formatSeconds } from '@/utils'
 
 interface Props {
   nftSetList: any[]
@@ -139,14 +140,21 @@ const handleMint = (item: NFTDETAIL) => {
   &__mint-now {
     margin: 28px auto 0;
     width: 332px;
+    height: 128px;
+    text-align: center;
+    line-height: 128px;
+    font-size: 30px;
+    font-family: Chinese Rocks-Regular, Chinese Rocks;
+    color: #fff;
+    background: url(/src/assets/images/mint/group32@2x.webp) no-repeat;
+    background-size: 100% 100%;
     @media screen and (max-width: 768px) {
       margin: 25px auto 0;
       width: 204px;
+      height: 78px;
+      line-height: 78px;
     }
     cursor: pointer;
-    img {
-      width: 100%;
-    }
   }
 }
 </style>

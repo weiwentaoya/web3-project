@@ -12,25 +12,32 @@ class Mm {
   error: string | undefined // 错误信息
 
   constructor() {
-    this.init()
+    // this.init()
   }
   restart() {
     Mm.getInstance()
   }
-  async init() {
+  async init(fnSu: () => void, fnEr: (str: string) => void) {
     this.error = undefined
     if (typeof window.ethereum !== 'undefined') {
       const res = await window.ethereum.enable()
+      console.log('userAdderss', res)
       this.userAdderss = res[0]
-
       this.web3 = new Web3(window.ethereum)
+      fnSu()
       // alert('当前钱包地址:' + res[0])
       this.web3.eth.getAccounts(function (error: any, result: any) {
-        if (!error) console.log(result) //授权成功后result能正常获取到账号了
+        console.log('getAccounts', error, result) //授权成功后result能正常获取到账号了
+        if (!error) {
+          fnSu()
+          return
+        }
+        fnEr('MetaMask not found. Please install MetaMask extension.')
       })
     } else {
       this.error = 'MetaMask not found. Please install MetaMask extension.'
       console.error('MetaMask not found. Please install MetaMask extension.')
+      fnEr('MetaMask not found. Please install MetaMask extension.')
     }
   }
   // 查询钱包ETH余额
@@ -61,8 +68,9 @@ class Mm {
   async sendTransaction(
     nft: any,
     successFn: (arg0: any) => void,
+    processFn: (arg0: any) => void,
     errorFn: (arg0: any) => void,
-    type: string | undefined = undefined,
+    type: any,
   ) {
     if (this.userAdderss === undefined) {
       return
@@ -74,22 +82,29 @@ class Mm {
     const contractABI = JSON.parse(atob(nft.contractABI))
     const contract = new this.web3.eth.Contract(contractABI, toAddress)
     let methodData
+
     if (type === 'claim') {
       // 空投合约
       methodData = contract.methods.claim().encodeABI()
-    } else if (nft.mintPrice === 0) {
+    } else if (type === 'free-mint') {
       // 免费mint
       methodData = contract.methods.freeMint().encodeABI()
     } else {
       // 付费mint
       methodData = contract.methods.mint().encodeABI()
     }
+    const res = await this.web3.eth.getGasPrice()
+    const balance = this.web3.utils.fromWei(res, 'ether')
     this.web3.eth
       .sendTransaction({
         from: this.userAdderss,
         to: toAddress,
         data: methodData,
         value: amountWei,
+      })
+      .on('sending', function (error: any, transactionHash: any) {
+        console.log('sending', error, transactionHash)
+        processFn(Object.assign({}, nft, { gasPrice: balance }))
       })
       .on('transactionHash', successFn)
       // .on('receipt', function (receipt: any) {

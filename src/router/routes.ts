@@ -17,6 +17,11 @@ const routes = [
     component: Mint,
     name: 'mint',
   },
+  {
+    path: '/free-mint',
+    component: Mint,
+    name: 'free-mint',
+  },
   { path: '/404', component: import('@/views/404/index.vue'), name: '404' },
   // { path: '/:pathMatch(.*)*', redirect: '/404', name: 'Home' },
 ]

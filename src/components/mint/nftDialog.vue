@@ -22,12 +22,13 @@
       <div>
         <div class="name">{{ nft?.nftSetName }}</div>
         <div class="hour">{{ nft?.lastHourMintCount }} mints last hr</div>
-        <img
-          @click="handleMint"
-          class="mint"
-          src="../../assets/images/mint/Group32@2x.webp"
-          alt=""
-        />
+        <div class="mint" @click="handleMint">
+          {{
+            route.name === 'free-mint'
+              ? 'Mint For Free'
+              : 'mint 1 for ' + (nft?.mintPrice || 0) * 0.0001 + ' ETH'
+          }}
+        </div>
       </div>
       <img class="img" :src="nft?.nftTokenList[0]?.tokenImage" />
     </div>
@@ -41,7 +42,7 @@
           class="item"
         >
           <img :src="child.tokenImage" />
-          <div class="price">{{ child.tokenMintedTime }}</div>
+          <div class="price"># {{ child.tokenId }}</div>
           <div class="desc">
             Minted by
             <el-tooltip
@@ -54,7 +55,9 @@
             </el-tooltip>
           </div>
           <div class="free">
-            FREE • {{ Math.floor(child.tokenMintedTime / 60) }}m
+            <!-- FREE •  -->
+            <!-- {{ Math.floor(child.tokenMintedTime / 60) }}m -->
+            {{ formatSeconds(child.tokenMintedTime) }}
           </div>
         </div>
       </div>
@@ -82,7 +85,7 @@
         <img
           src="../../assets/images/mint/dog-head.webp"
           alt=""
-          @click="handleMint"
+          @click="handleLogin"
         />
         <div class="text">
           To continue, please login to your MetaMask extension.
@@ -91,6 +94,8 @@
     </el-dialog>
   </el-dialog>
   <ViewEtherscan ref="ViewEtherscanRef" />
+  <Message ref="MessageRef" />
+  <NftProcess ref="NftProcessRef" />
 </template>
 
 <script setup lang="ts">
@@ -98,6 +103,11 @@ import { ref } from 'vue'
 import { NFTDETAIL } from '@/api/nft/type'
 import Mm from './useMm'
 import ViewEtherscan from './viewEtherscan.vue'
+import Message from './message.vue'
+import NftProcess from './nftProcess.vue'
+import { formatSeconds } from '@/utils'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 const dialogVisible = ref(false)
 const loginVisible = ref(false)
 const nft = ref<NFTDETAIL>()
@@ -112,18 +122,39 @@ const handleOpen = (item: NFTDETAIL) => {
 }
 
 const ViewEtherscanRef = ref()
-const MM = Mm.getInstance()
+const MessageRef = ref()
+let MM = Mm.getInstance()
+const handleLogin = () => {
+  MM.init(
+    () => {
+      loginVisible.value = false
+      handleMint()
+    },
+    (err: string) => {
+      MessageRef.value.show(err)
+    },
+  )
+}
+const NftProcessRef = ref()
 const handleMint = () => {
-  if (!MM.userAdderss || MM.error) return (loginVisible.value = true)
+  if (!MM || !MM.userAdderss || MM.error) return (loginVisible.value = true)
   loginVisible.value = false
   MM.sendTransaction(
     nft.value,
-    (hash) => {
+    (hash: any) => {
       ViewEtherscanRef.value.show(hash)
+      // window.location.reload()
     },
-    (err) => {
+    (nft) => {
+      console.log(nft)
+      NftProcessRef.value.show(nft)
+    },
+    (err: { message: any }) => {
       console.log(err.message)
+      NftProcessRef.value.hide()
+      MessageRef.value.show(err.message)
     },
+    route.name || '',
   )
 }
 defineExpose({
@@ -227,14 +258,22 @@ defineExpose({
       }
     }
     .mint {
-      width: 250px;
+      // width: 250px;
       height: 96px;
+      line-height: 96px;
+      padding: 0 45px;
+      font-size: 23px;
+      font-family: Chinese Rocks-Regular, Chinese Rocks;
+      color: #fff;
       margin-top: 40px;
       margin-left: -26px;
+      background: url(/src/assets/images/mint/group32@2x.webp) no-repeat;
+      background-size: 100% 100%;
       cursor: pointer;
       @media screen and (max-width: 768px) {
-        width: 204px;
+        // width: 204px;
         height: 80px;
+        line-height: 80px;
         margin-top: 18px;
         margin-left: 0px;
       }
