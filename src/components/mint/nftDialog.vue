@@ -128,7 +128,7 @@ const handleLogin = () => {
 const NftProcessRef = ref()
 const handleMint = () => {
   console.log(MM)
-  if (!MM || !MM.userAdderss || MM.error) {
+  if (!MM || MM.error) {
     loginVisible.value = true
     MM.initWeb3(
       () => {
@@ -146,6 +146,7 @@ const handleMint = () => {
     nft.value,
     (hash: any) => {
       dialogVisible.value = false
+      NftProcessRef.value.hide()
       ViewEtherscanRef.value.show(hash)
       // window.location.reload()
     },

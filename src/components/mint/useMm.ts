@@ -7,7 +7,6 @@ declare global {
   }
 }
 class Mm {
-  userAdderss = '' // 用户地址
   error: string | undefined // 错误信息
 
   constructor() {
@@ -20,7 +19,6 @@ class Mm {
     if (typeof window.ethereum !== 'undefined') {
       const res = await window.ethereum.enable()
       console.log('userAdderss', res)
-      this.userAdderss = res[0]
       fnSu()
       const web3 = new Web3(window.ethereum)
       this.checkNetId(web3)
@@ -37,7 +35,6 @@ class Mm {
       const web3 = new Web3(window.ethereum)
       const res = await web3.eth.getAccounts()
       console.log('userAdderss', res)
-      this.userAdderss = res[0]
       if (res.length > 0) {
         this.checkNetId(web3)
       }
@@ -49,11 +46,10 @@ class Mm {
   // 查询钱包ETH余额
   async getBalance() {
     if (typeof window.ethereum !== 'undefined') {
-      if (this.userAdderss === undefined) {
-        return
-      }
       const web3 = new Web3(window.ethereum)
-      const res = await web3.eth.getBalance(this.userAdderss)
+      const userAdderss = await web3.eth.getAccounts()
+      console.log('userAdderss', userAdderss)
+      const res = await web3.eth.getBalance(userAdderss[0])
       const balance = web3.utils.fromWei(res, 'ether')
       ElMessage.success('当前钱包余额:' + balance)
     } else {
@@ -89,9 +85,6 @@ class Mm {
       errorFn('MetaMask not found. Please install MetaMask extension.')
       return
     }
-    if (this.userAdderss === undefined) {
-      return
-    }
     const web3 = new Web3(window.ethereum)
     const toAddress = nft.contractAddress
     const amountWei = nft.mintPrice
@@ -103,49 +96,54 @@ class Mm {
     if (type === 'claim') {
       // 空投合约
       transaction = {
-        from: this.userAdderss,
         to: toAddress,
-        // gasPrice: web3.utils.toWei('1', 'gwei'), // 燃气价格
         data: contract.methods.claim().encodeABI(),
       }
     } else if (type === 'free-mint') {
       // 免费mint
       transaction = {
-        from: this.userAdderss,
         to: toAddress,
-        // gasPrice: web3.utils.toWei('1', 'gwei'), // 燃气价格
         data: contract.methods.freeMint().encodeABI(),
       }
     } else {
       // 付费mint
       transaction = {
-        from: this.userAdderss,
         to: toAddress,
-        // gasPrice: web3.utils.toWei('1', 'gwei'), // 燃气价格
         data: contract.methods.mint().encodeABI(),
         value: amountWei,
       }
     }
-    const res = await web3.eth.getGasPrice()
-    const balance = web3.utils.fromWei(res, 'ether')
-    console.log('gasPrice', res, balance)
-    console.log('transaction', transaction)
-    web3.eth
-      .sendTransaction(transaction)
-      .on('sending', () => {
-        processFn(Object.assign({}, nft, { gasPrice: balance }))
-      })
-      .on('transactionHash', successFn)
-      // .on('receipt', function (receipt: any) {
-      //   console.info('receipt', receipt)
-      // })
-      // .on('confirmation', function (confirmationNumber: any, receipt: any) {
-      //   console.info('confirmation', confirmationNumber)
-      //   console.info('confirmation', receipt) // undefined
-      // })
-      .on('error', errorFn)
+    // debugger
+    try {
+      const userAdderss = await web3.eth.getAccounts()
+      console.log('userAdderss', userAdderss)
+      const gas = await web3.eth.estimateGas(transaction)
+      console.log('gas', gas)
+      const gasPrice = await web3.eth.getGasPrice()
+      console.log('gasPrice', gasPrice)
+      const balance = web3.utils.fromWei(gas * gasPrice, 'ether')
+      console.log('balance', balance)
+      console.log('transaction', transaction)
+      web3.eth
+        .sendTransaction({ ...transaction, from: userAdderss[0], gas })
+        .on('sending', () => {
+          processFn(Object.assign({}, nft, { gasPrice: balance }))
+        })
+        .on('transactionHash', successFn)
+        // .on('receipt', function (receipt: any) {
+        //   console.info('receipt', receipt)
+        // })
+        // .on('confirmation', function (confirmationNumber: any, receipt: any) {
+        //   console.info('confirmation', confirmationNumber)
+        //   console.info('confirmation', receipt) // undefined
+        // })
+        .on('error', errorFn)
 
-      .catch(errorFn)
+        .catch(errorFn)
+    } catch (error) {
+      console.log('error', error)
+      errorFn(error)
+    }
   }
   checkNetId(web3: { eth: { net: { getId: () => Promise<any> } } }) {
     web3.eth.net.getId().then(function (networkId: any) {

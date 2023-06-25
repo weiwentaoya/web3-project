@@ -84,7 +84,7 @@ const handleLogin = () => {
   console.log(MM)
 }
 const handleClaim = () => {
-  if (!MM || !MM.userAdderss || MM.error) {
+  if (!MM || MM.error) {
     loginVisible.value = true
     MM.initWeb3(
       () => {
