@@ -9,7 +9,12 @@
         </div>
       </div>
       <div class="detalis">
-        <div class="img"></div>
+        <!-- <div class="img"></div> -->
+        <img
+          class="img"
+          src="../../assets/images/home/Group17@2x.webp"
+          alt=""
+        />
         <div class="detalis-content">
           <div class="title">detalis</div>
           <div class="desc">{{ item.desc }}</div>
