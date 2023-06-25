@@ -1,7 +1,7 @@
 <template>
   <div class="mint-page">
     <Header initActive="mint" />
-    <Tab init="mint" />
+    <!-- <Tab init="mint" /> -->
     <NftList :nftSetList="nftSetList" />
     <Footer />
   </div>
@@ -37,7 +37,7 @@ const itemFill = async (item: NftSet) => {
   const params = {
     nftSetId: item.nftSetId,
     offset: 0,
-    limit: 6,
+    limit: 12,
   }
   const [token, detail] = await Promise.all([
     getNftTokenList(params),

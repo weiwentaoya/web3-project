@@ -117,31 +117,35 @@ const handleClose = (done: () => void) => {
 const handleOpen = (item: NFTDETAIL) => {
   nft.value = item
   dialogVisible.value = true
-  // console.log(Mm.instance)
-  // console.log(Mm.getInstance())
 }
 
 const ViewEtherscanRef = ref()
 const MessageRef = ref()
 let MM = Mm.getInstance()
 const handleLogin = () => {
-  MM.init(
-    () => {
-      loginVisible.value = false
-      handleMint()
-    },
-    (err: string) => {
-      MessageRef.value.show(err)
-    },
-  )
+  console.log(MM)
 }
 const NftProcessRef = ref()
 const handleMint = () => {
-  if (!MM || !MM.userAdderss || MM.error) return (loginVisible.value = true)
+  console.log(MM)
+  if (!MM || !MM.userAdderss || MM.error) {
+    loginVisible.value = true
+    MM.initWeb3(
+      () => {
+        loginVisible.value = false
+        handleMint()
+      },
+      (err: string) => {
+        MessageRef.value.show(err)
+      },
+    )
+    return
+  }
   loginVisible.value = false
   MM.sendTransaction(
     nft.value,
     (hash: any) => {
+      dialogVisible.value = false
       ViewEtherscanRef.value.show(hash)
       // window.location.reload()
     },

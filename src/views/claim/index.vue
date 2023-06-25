@@ -1,7 +1,7 @@
 <template>
   <div class="mint-page">
     <Header initActive="claim" />
-    <Tab init="claim" />
+    <!-- <Tab init="claim" /> -->
     <Project />
     <Footer />
   </div>

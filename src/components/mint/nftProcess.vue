@@ -21,7 +21,7 @@
           <span v-else>{{ nft.mintPrice * 0.0001 }} ETH</span>
         </div>
         <div>
-          <span>GasEee:</span>
+          <span>GasFee:</span>
           <span>~{{ nft.gasPrice }} ETH</span>
         </div>
         <div>

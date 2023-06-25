@@ -7,47 +7,54 @@ declare global {
   }
 }
 class Mm {
-  web3: any = null // web3实例
   userAdderss = '' // 用户地址
   error: string | undefined // 错误信息
 
   constructor() {
-    // this.init()
+    this.init()
   }
   restart() {
     Mm.getInstance()
   }
-  async init(fnSu: () => void, fnEr: (str: string) => void) {
-    this.error = undefined
+  async initWeb3(fnSu: () => void, fnEr: (str: string) => void) {
     if (typeof window.ethereum !== 'undefined') {
       const res = await window.ethereum.enable()
       console.log('userAdderss', res)
       this.userAdderss = res[0]
-      this.web3 = new Web3(window.ethereum)
       fnSu()
-      // alert('当前钱包地址:' + res[0])
-      this.web3.eth.getAccounts(function (error: any, result: any) {
-        console.log('getAccounts', error, result) //授权成功后result能正常获取到账号了
-        if (!error) {
-          fnSu()
-          return
-        }
-        fnEr('MetaMask not found. Please install MetaMask extension.')
-      })
     } else {
       this.error = 'MetaMask not found. Please install MetaMask extension.'
       console.error('MetaMask not found. Please install MetaMask extension.')
       fnEr('MetaMask not found. Please install MetaMask extension.')
     }
   }
+  async init() {
+    this.error = undefined
+    if (typeof window.ethereum !== 'undefined') {
+      // alert('当前钱包地址:' + res[0])
+      const web3 = new Web3(window.ethereum)
+      const res = await web3.eth.getAccounts()
+      console.log('userAdderss', res)
+      this.userAdderss = res[0]
+    } else {
+      this.error = 'MetaMask not found. Please install MetaMask extension.'
+      console.error('MetaMask not found. Please install MetaMask extension.')
+    }
+  }
   // 查询钱包ETH余额
   async getBalance() {
-    if (this.userAdderss === undefined) {
-      return
+    if (typeof window.ethereum !== 'undefined') {
+      if (this.userAdderss === undefined) {
+        return
+      }
+      const web3 = new Web3(window.ethereum)
+      const res = await web3.eth.getBalance(this.userAdderss)
+      const balance = web3.utils.fromWei(res, 'ether')
+      ElMessage.success('当前钱包余额:' + balance)
+    } else {
+      this.error = 'MetaMask not found. Please install MetaMask extension.'
+      console.error('MetaMask not found. Please install MetaMask extension.')
     }
-    const res = await this.web3.eth.getBalance(this.userAdderss)
-    const balance = this.web3.utils.fromWei(res, 'ether')
-    ElMessage.success('当前钱包余额:' + balance)
   }
   // 查询代币余额
   async getEth(nft: any) {
@@ -72,38 +79,52 @@ class Mm {
     errorFn: (arg0: any) => void,
     type: any,
   ) {
+    if (typeof window.ethereum === 'undefined') {
+      this.error = 'MetaMask not found. Please install MetaMask extension.'
+      errorFn('MetaMask not found. Please install MetaMask extension.')
+      return
+    }
     if (this.userAdderss === undefined) {
       return
     }
+    const web3 = new Web3(window.ethereum)
     const toAddress = nft.contractAddress
     const amountWei = nft.mintPrice
-      ? this.web3.utils.toWei(nft.mintPrice * 0.0001, 'ether')
+      ? web3.utils.toWei(nft.mintPrice * 0.0001, 'ether')
       : 0
     const contractABI = JSON.parse(atob(nft.contractABI))
-    const contract = new this.web3.eth.Contract(contractABI, toAddress)
-    let methodData
-
+    const contract = new web3.eth.Contract(contractABI, toAddress)
+    let transaction = {}
     if (type === 'claim') {
       // 空投合约
-      methodData = contract.methods.claim().encodeABI()
-    } else if (type === 'free-mint') {
-      // 免费mint
-      methodData = contract.methods.freeMint().encodeABI()
-    } else {
-      // 付费mint
-      methodData = contract.methods.mint().encodeABI()
-    }
-    const res = await this.web3.eth.getGasPrice()
-    const balance = this.web3.utils.fromWei(res, 'ether')
-    this.web3.eth
-      .sendTransaction({
+      transaction = {
         from: this.userAdderss,
         to: toAddress,
-        data: methodData,
+        data: contract.methods.claim().encodeABI(),
+      }
+    } else if (type === 'free-mint') {
+      // 免费mint
+      transaction = {
+        from: this.userAdderss,
+        to: toAddress,
+        data: contract.methods.freeMint().encodeABI(),
+      }
+    } else {
+      // 付费mint
+      transaction = {
+        from: this.userAdderss,
+        to: toAddress,
+        data: contract.methods.mint().encodeABI(),
         value: amountWei,
-      })
-      .on('sending', function (error: any, transactionHash: any) {
-        console.log('sending', error, transactionHash)
+      }
+    }
+    const res = await web3.eth.getGasPrice()
+    const balance = web3.utils.fromWei(res, 'ether')
+    console.log('gasPrice', balance)
+    console.log('transaction', transaction)
+    web3.eth
+      .sendTransaction(transaction)
+      .on('sending', () => {
         processFn(Object.assign({}, nft, { gasPrice: balance }))
       })
       .on('transactionHash', successFn)
