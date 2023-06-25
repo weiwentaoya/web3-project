@@ -127,7 +127,10 @@ class Mm {
         userAdderss = await window.ethereum.enable()
       }
       console.log('userAdderss', userAdderss)
-      const gas = await web3.eth.estimateGas(transaction)
+      const gas = await web3.eth.estimateGas({
+        ...transaction,
+        from: userAdderss[0],
+      })
       console.log('gas', gas)
       const gasPrice = await web3.eth.getGasPrice()
       console.log('gasPrice', gasPrice)
