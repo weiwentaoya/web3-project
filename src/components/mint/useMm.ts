@@ -105,6 +105,7 @@ class Mm {
       transaction = {
         from: this.userAdderss,
         to: toAddress,
+        gasPrice: web3.utils.toWei('0.1', 'gwei'), // 燃气价格
         data: contract.methods.claim().encodeABI(),
       }
     } else if (type === 'free-mint') {
@@ -112,6 +113,7 @@ class Mm {
       transaction = {
         from: this.userAdderss,
         to: toAddress,
+        gasPrice: web3.utils.toWei('0.1', 'gwei'), // 燃气价格
         data: contract.methods.freeMint().encodeABI(),
       }
     } else {
@@ -119,6 +121,7 @@ class Mm {
       transaction = {
         from: this.userAdderss,
         to: toAddress,
+        gasPrice: web3.utils.toWei('0.1', 'gwei'), // 燃气价格
         data: contract.methods.mint().encodeABI(),
         value: amountWei,
       }

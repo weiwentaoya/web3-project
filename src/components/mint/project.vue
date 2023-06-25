@@ -81,18 +81,22 @@ const MessageRef = ref()
 const loginVisible = ref(false)
 let MM = Mm.getInstance()
 const handleLogin = () => {
-  MM.initWeb3(
-    () => {
-      loginVisible.value = false
-      handleClaim()
-    },
-    (err: string) => {
-      MessageRef.value.show(err)
-    },
-  )
+  console.log(MM)
 }
 const handleClaim = () => {
-  if (!MM || !MM.userAdderss || MM.error) return (loginVisible.value = true)
+  if (!MM || !MM.userAdderss || MM.error) {
+    loginVisible.value = true
+    MM.initWeb3(
+      () => {
+        loginVisible.value = false
+        handleClaim()
+      },
+      (err: string) => {
+        MessageRef.value.show(err)
+      },
+    )
+    return
+  }
   loginVisible.value = false
   MM.sendTransaction(
     AirDropContract.value,
