@@ -22,6 +22,8 @@ class Mm {
       console.log('userAdderss', res)
       this.userAdderss = res[0]
       fnSu()
+      const web3 = new Web3(window.ethereum)
+      this.checkNetId(web3)
     } else {
       this.error = 'MetaMask not found. Please install MetaMask extension.'
       console.error('MetaMask not found. Please install MetaMask extension.')
@@ -36,6 +38,9 @@ class Mm {
       const res = await web3.eth.getAccounts()
       console.log('userAdderss', res)
       this.userAdderss = res[0]
+      if (res.length > 0) {
+        this.checkNetId(web3)
+      }
     } else {
       this.error = 'MetaMask not found. Please install MetaMask extension.'
       console.error('MetaMask not found. Please install MetaMask extension.')
@@ -138,6 +143,25 @@ class Mm {
       .on('error', errorFn)
 
       .catch(errorFn)
+  }
+  checkNetId(web3: { eth: { net: { getId: () => Promise<any> } } }) {
+    web3.eth.net.getId().then(function (networkId: any) {
+      console.log(`当前网络的 ID 为: ${Number(networkId)}`)
+      if (Number(networkId) !== 5) {
+        // 切换到 Ropsten 测试网
+        window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: '0x5' }],
+        })
+      }
+      // if (Number(networkId) !== 1) {
+      //   // 切换到 Ropsten 测试网
+      //   window.ethereum.request({
+      //     method: 'wallet_switchEthereumChain',
+      //     params: [{ chainId: '0x1' }],
+      //   })
+      // }
+    })
   }
   static instance: Mm
   static getInstance() {
