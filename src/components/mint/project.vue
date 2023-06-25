@@ -81,7 +81,7 @@ const MessageRef = ref()
 const loginVisible = ref(false)
 let MM = Mm.getInstance()
 const handleLogin = () => {
-  MM.init(
+  MM.initWeb3(
     () => {
       loginVisible.value = false
       handleClaim()
