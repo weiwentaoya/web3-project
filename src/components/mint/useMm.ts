@@ -105,7 +105,7 @@ class Mm {
       transaction = {
         from: this.userAdderss,
         to: toAddress,
-        gasPrice: web3.utils.toWei('0.1', 'gwei'), // 燃气价格
+        // gasPrice: web3.utils.toWei('1', 'gwei'), // 燃气价格
         data: contract.methods.claim().encodeABI(),
       }
     } else if (type === 'free-mint') {
@@ -113,7 +113,7 @@ class Mm {
       transaction = {
         from: this.userAdderss,
         to: toAddress,
-        gasPrice: web3.utils.toWei('0.1', 'gwei'), // 燃气价格
+        // gasPrice: web3.utils.toWei('1', 'gwei'), // 燃气价格
         data: contract.methods.freeMint().encodeABI(),
       }
     } else {
@@ -121,14 +121,14 @@ class Mm {
       transaction = {
         from: this.userAdderss,
         to: toAddress,
-        gasPrice: web3.utils.toWei('0.1', 'gwei'), // 燃气价格
+        // gasPrice: web3.utils.toWei('1', 'gwei'), // 燃气价格
         data: contract.methods.mint().encodeABI(),
         value: amountWei,
       }
     }
     const res = await web3.eth.getGasPrice()
     const balance = web3.utils.fromWei(res, 'ether')
-    console.log('gasPrice', balance)
+    console.log('gasPrice', res, balance)
     console.log('transaction', transaction)
     web3.eth
       .sendTransaction(transaction)
