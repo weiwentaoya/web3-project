@@ -37,6 +37,13 @@ class Mm {
       console.log('userAdderss', res)
       if (res.length > 0) {
         this.checkNetId(web3)
+      } else {
+        // this.initWeb3(
+        //   // eslint-disable-next-line @typescript-eslint/no-empty-function
+        //   () => {},
+        //   // eslint-disable-next-line @typescript-eslint/no-empty-function
+        //   () => {},
+        // )
       }
     } else {
       this.error = 'MetaMask not found. Please install MetaMask extension.'
@@ -115,7 +122,10 @@ class Mm {
     }
     // debugger
     try {
-      const userAdderss = await web3.eth.getAccounts()
+      let userAdderss = await web3.eth.getAccounts()
+      if (userAdderss.length === 0) {
+        userAdderss = await window.ethereum.enable()
+      }
       console.log('userAdderss', userAdderss)
       const gas = await web3.eth.estimateGas(transaction)
       console.log('gas', gas)
