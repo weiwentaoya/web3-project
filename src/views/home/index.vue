@@ -5,6 +5,7 @@
       <Banner />
       <About />
       <Tokenomics />
+      <Story />
       <Land />
       <RoadMap />
       <ContactUs />
@@ -18,6 +19,7 @@ import Banner from '@/components/home/banner.vue'
 import About from '@/components/home/about.vue'
 import Tokenomics from '@/components/home/tokenomics.vue'
 import Land from '@/components/home/land.vue'
+import Story from '@/components/home/story.vue'
 import RoadMap from '@/components/home/roadMap.vue'
 import ContactUs from '@/components/home/contactUs.vue'
 </script>
@@ -32,8 +34,8 @@ import ContactUs from '@/components/home/contactUs.vue'
     background-size: 100% 75vh;
   }
   .home-page__content {
-    background: url(/src/assets/images/home/Group24@2x.webp) no-repeat;
-    background-size: 100% 100%;
+    background: url(/src/assets/images/home/Group24@2x.webp) repeat;
+    background-size: 100% auto;
   }
 }
 </style>
