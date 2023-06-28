@@ -1,7 +1,9 @@
 <template>
   <div class="header-nav">
     <div class="header-nav__home">
-      <img src="../../assets/images/home/image30@2x.webp" alt="" />
+      <router-link to="/">
+        <img src="../../assets/images/home/image30@2x.webp" alt="" />
+      </router-link>
     </div>
     <div class="header-nav__page" v-show="navShow" @click="handleSwitch(false)">
       <div class="close">

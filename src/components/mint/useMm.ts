@@ -93,6 +93,15 @@ class Mm {
       return
     }
     const web3 = new Web3(window.ethereum)
+    const networkId: any = await web3.eth.net.getId()
+    console.log(`当前网络的 ID 为: ${Number(networkId)}`)
+    if (Number(networkId) !== 5) {
+      // 切换到 Ropsten 测试网
+      return window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x5' }],
+      })
+    }
     const toAddress = nft.contractAddress
     const amountWei = nft.mintPrice
       ? web3.utils.toWei(nft.mintPrice * 0.0001, 'ether')
@@ -158,24 +167,23 @@ class Mm {
       errorFn(error)
     }
   }
-  checkNetId(web3: { eth: { net: { getId: () => Promise<any> } } }) {
-    web3.eth.net.getId().then(function (networkId: any) {
-      console.log(`当前网络的 ID 为: ${Number(networkId)}`)
-      if (Number(networkId) !== 5) {
-        // 切换到 Ropsten 测试网
-        window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: '0x5' }],
-        })
-      }
-      // if (Number(networkId) !== 1) {
-      //   // 切换到 Ropsten 测试网
-      //   window.ethereum.request({
-      //     method: 'wallet_switchEthereumChain',
-      //     params: [{ chainId: '0x1' }],
-      //   })
-      // }
-    })
+  async checkNetId(web3: { eth: { net: { getId: () => Promise<any> } } }) {
+    const networkId: any = await web3.eth.net.getId()
+    console.log(`当前网络的 ID 为: ${Number(networkId)}`)
+    if (Number(networkId) !== 5) {
+      // 切换到 Ropsten 测试网
+      return window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: '0x5' }],
+      })
+    }
+    // if (Number(networkId) !== 1) {
+    //   // 切换到 Ropsten 测试网
+    //   window.ethereum.request({
+    //     method: 'wallet_switchEthereumChain',
+    //     params: [{ chainId: '0x1' }],
+    //   })
+    // }
   }
   static instance: Mm
   static getInstance() {
