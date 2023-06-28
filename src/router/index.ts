@@ -1,9 +1,13 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import {
+  createRouter,
+  // createWebHashHistory,
+  createWebHistory,
+} from 'vue-router'
 import routes from './routes'
 
 const router = createRouter({
-  // history: createWebHistory('/'),
-  history: createWebHashHistory('/'),
+  history: createWebHistory('/'),
+  // history: createWebHashHistory('/'),
   routes,
   scrollBehavior() {
     // 始终滚动到顶部

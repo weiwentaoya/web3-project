@@ -108,6 +108,7 @@ defineExpose({
     font-weight: 500;
     color: #fff;
     @media screen and (max-width: 768px) {
+      flex-direction: column;
       font-size: 12px;
       padding-bottom: 16px;
     }
@@ -118,11 +119,15 @@ defineExpose({
       @media screen and (max-width: 768px) {
         width: 100px;
         height: 100px;
-        margin-right: 26px;
+        margin-right: 0px;
+        margin-bottom: 16px;
       }
     }
     .price {
       flex: 1;
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
       div {
         height: 40px;
         display: flex;

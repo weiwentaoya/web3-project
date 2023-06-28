@@ -58,8 +58,8 @@ import { defineProps, onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 const props = defineProps(['initActive'])
 
-const navShow = ref(false)
-const isM = ref(true)
+const navShow = ref(true)
+const isM = ref(false)
 const router = useRouter()
 const route = useRoute()
 const store = useAppStore()
@@ -84,12 +84,15 @@ const handleMoveTo = (item: any) => {
 
 // 监听width
 watch(
-  () => width,
+  () => width.value,
   (val) => {
-    if (val.value > 768) {
+    console.log(val)
+    if (val > 768) {
       isM.value = false
+      navShow.value = true
     } else {
       isM.value = true
+      navShow.value = false
     }
   },
 )
@@ -110,6 +113,9 @@ onMounted(() => {
   if (width.value > 768) {
     isM.value = false
     navShow.value = true
+  } else {
+    isM.value = true
+    navShow.value = false
   }
 })
 const handleSwitch = (val: boolean) => {
