@@ -84,9 +84,9 @@ defineExpose({
     line-height: 35px;
     padding: 72px 0;
     @media screen and (max-width: 768px) {
-      height: 60px;
-      line-height: 60px;
-      font-size: 16px;
+      font-size: 12px;
+      line-height: initial;
+      padding: 24px 0;
       margin-bottom: 10px;
     }
   }
@@ -94,6 +94,10 @@ defineExpose({
     width: 330px;
     margin: 15px auto 0;
     cursor: pointer;
+    @media screen and (max-width: 768px) {
+      width: 204px;
+      margin-bottom: 20px;
+    }
   }
 }
 </style>

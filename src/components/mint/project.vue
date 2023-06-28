@@ -134,6 +134,7 @@ const projectList = ref([
   margin-top: 78px;
   @media screen and (max-width: 768px) {
     margin-top: 20px;
+    padding: 0 20px;
   }
   .project-list {
     padding-bottom: 78px;
@@ -178,6 +179,7 @@ const projectList = ref([
         no-repeat;
       background-size: 100% 100%;
       @media screen and (max-width: 768px) {
+        background: none;
         margin-top: 20px;
         flex-direction: column;
       }
@@ -194,6 +196,9 @@ const projectList = ref([
         padding: 54px 70px;
         @media screen and (max-width: 768px) {
           padding: 26px 8px;
+          background: url(../../assets/images/mint/Rectangle4@2x2.webp) 100%
+            no-repeat;
+          background-size: 100% 100%;
         }
         .title {
           margin-top: 16px;
