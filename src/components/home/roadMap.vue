@@ -13,11 +13,13 @@
           <img class="photo" :src="item.path" alt="" />
           <div class="time">
             {{ item.time }}
-            <br />
-            {{ item.time2 }}
+            <!-- <br />
+            {{ item.time2 }} -->
           </div>
           <!-- <div class="time" v-if="item.time2">{{ item.time2 }}</div> -->
-          <div class="desc">{{ item.desc }}</div>
+          <div class="desc">
+            <p v-for="l in item.desc" :key="l">{{ l }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -33,45 +35,54 @@ import path5 from '@/assets/images/home/image49@2x.webp'
 const dataList = [
   {
     id: 1,
-    time: '2023 H2',
-    desc: `This is an introduction to the project This is an introduction to
-            the project This is an introduction to the project This is an
-            introduction to the project This is an introduction to the project
-            This is an introduction to the project`,
+    time: 'Phase 0',
+    desc: [
+      `Launch the Joker Movement, creating chaos`,
+      `Design Joker NFTs`,
+      `Recruit initial Jokers`,
+    ],
     path: path1,
   },
   {
     id: 2,
-    time: '2024 H1',
-    desc: `This is an introduction to the project This is an introduction to
-            the project This is an introduction to the project This is an
-            introduction to the project This is an introduction to the project
-            This is an introduction to the project`,
+    time: 'Phase 1',
+    desc: [
+      `Mint Joker NFTs`,
+      `Reach 2,500 NFT holders`,
+      `List on OPENSEA`,
+      `Comprehensive upgrade of the official website`,
+    ],
     path: path2,
   },
   {
     id: 3,
-    time: '2025 H1',
-    desc: `This is an introduction to the project This is an introduction to
-            the project This is an introduction to the project This is an
-            introduction to the project This is an introduction to the project
-            This is an introduction to the project`,
+    time: 'Phase 2',
+    desc: [
+      `Release Joker AI`,
+      `Launch Joker Exhibition Hall`,
+      `Introduce Chaos Ground`,
+      `Announce Joker Chaos Creators`,
+      `Release details about $TJOKER`,
+      `Launch $TJOKER on Uniswap`,
+    ],
     path: path3,
   },
   {
     id: 4,
-    time: '2025 H2',
-    desc: `This is an introduction to the project This is an introduction to
-            the project This is an introduction to the project This is an
-            introduction to the project This is an introduction to the project
-            This is an introduction to the project`,
+    time: 'Phase 3',
+    desc: [
+      `Announce Joker Brand Ambassador Program`,
+      `Establish Joker Club`,
+      `Found Chaos Labs`,
+      `Launch MEME LABS Metaverse Space`,
+    ],
     path: path4,
   },
   {
     id: 5,
-    time: 'Coming',
-    time2: 'Soon',
-    desc: ``,
+    time: 'Phase 4',
+    // time2: 'Soon',
+    desc: [`Maintain the mystery`],
     path: path5,
   },
 ]
@@ -127,7 +138,8 @@ const dataList = [
         align-items: center;
         width: 275px;
         height: 430px;
-        background: url(../../assets/images/home/road-map-bg.webp) 100% no-repeat;
+        background: url(../../assets/images/home/road-map-bg.webp) 100%
+          no-repeat;
         background-size: 100% 100%;
         margin-right: 15px;
         position: relative;
@@ -169,8 +181,24 @@ const dataList = [
           font-family: Montserrat;
           font-weight: 400;
           color: #fff;
-          line-height: 21px;
-          margin-top: 13px;
+          line-height: 20px;
+          margin-top: 12px;
+          width: 100%;
+          text-align: left;
+          p {
+            padding-left: 12px;
+            position: relative;
+            &:before {
+              content: '';
+              position: absolute;
+              left: 2px;
+              top: 8px;
+              width: 4px;
+              height: 4px;
+              border-radius: 50%;
+              background: #fff;
+            }
+          }
         }
       }
     }

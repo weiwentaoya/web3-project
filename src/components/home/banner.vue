@@ -2,17 +2,15 @@
   <div class="home-page__banner" id="banner">
     <div class="banner-container w1400">
       <img class="banner" src="../../assets/images/home/banner.webp" alt="" />
-      <img
-        class="name"
-        src="../../assets/images/home/ProjectName@2x.webp"
-        alt=""
-      />
+      <!-- <img class="name" src="../../assets/images/home/ProjectName@2x.webp" /> -->
+      <img class="name" src="../../assets/images/home/ProjectName.png" />
       <!-- <div class="name">ProjectName</div> -->
       <p class="banner-container__desc">
-        This is an introduction to the project This is an introduction to the
-        project This is an introduction to the project This is an introduction
-        to the project This is an introduction to the project This is an
-        introduction to the project This is an introduction to the project
+        A defiant group of Jokers spread across the universe. Each of the Jokers
+        are representing free spirits, mischief makers,and agents of change.
+        Jokers reject societal norms and embrace the beauty in chaos. They
+        believe that through disruption, laughter, and an unwavering commitment
+        to authenticity, Jokers can reshape the world.
       </p>
     </div>
   </div>
@@ -34,12 +32,12 @@
       }
     }
     .name {
-      width: 637px;
+      width: 616px;
       /* height: 215px; */
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: 570px;
+      top: 532px;
       /* font-size: 187px;
       font-family: Resident Evil-Regular, Resident Evil;
       font-weight: 400;

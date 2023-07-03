@@ -5,11 +5,14 @@
       <img class="img1" src="../../assets/images/home/Group22@2x.webp" alt="" />
       <img class="img2" src="../../assets/images/home/Group22@2x2.webp" />
       <p>
-        XX is an NFT publishing platform, and this is an introduction to our
-        team.XX is an NFT publishing platform, and this is an introduction to
-        our team.XX is an NFT publishing platform, and this is an introduction
-        to our team.XX is an NFT publishing platform, and this is an
-        introduction to our team.
+        THE JOKER is a collection of 15,000 NFTs released by the Chaos
+        Laboratory. You can find them on OPENSEA. Each Joker is one-of-a-kind,
+        programmatically generated with over 100 possible traits including
+        props, headgear, clothing, eyes, and more.
+        <br />
+        Jokers are not just PFP or rare artworks. They can serve as your digital
+        identity within JOKERS LAND and MEME LABS, granting you additional
+        rights and membership benefits within the Joker Movement.
       </p>
     </div>
   </div>

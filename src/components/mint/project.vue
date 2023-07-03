@@ -5,7 +5,7 @@
       <div class="c-s">
         <div class="claimed">Claimed {{ AirDropContract?.totalClaim }}</div>
         <div class="sale">
-          Sale Ends {{ formatSeconds(AirDropContract?.saleEndTime) }}
+          Countdown {{ formatSeconds(AirDropContract?.saleEndTime) }}
         </div>
       </div>
       <div class="detalis">
@@ -16,12 +16,19 @@
           alt=""
         />
         <div class="detalis-content">
-          <div class="title">detalis</div>
+          <div class="title">MEME LABS</div>
           <div class="desc">{{ item.desc }}</div>
         </div>
       </div>
-      <div class="project-list__btn" @click="handleClaim">
-        <img src="../../assets/images/mint/Group214@2x.webp" alt="" />
+      <div
+        class="project-list__btn"
+        @click="handleClaim"
+        v-if="AirDropContract?.contractAddress"
+      >
+        <img src="../../assets/images/mint/Group300.png" alt="" />
+      </div>
+      <div v-else class="project-list__btn">
+        <img src="../../assets/images/mint/Group299.png" alt="" />
       </div>
     </div>
   </div>
@@ -121,10 +128,10 @@ const handleClaim = () => {
 const projectList = ref([
   {
     id: '1-1',
-    name: 'TokemProjectName',
+    name: 'Check Your Airdrop Eligibility',
     claimed: 'Claimed 89,893',
     sale: 'Sale Ends 10d 5h 9m 10s',
-    desc: `To commemorate the announcement of Worldcoin launching on Optimism Mainnet, we're releasing this limited edition NFT to add to your collection. Worldcoin and Optimism are committed to realizing a scalable, inclusive future that unlocks the full potential of crypto. Worldcoin's deployment on Optimism and entry into the Superchain are an important milestone in the evolution of identity on the blockchain.`,
+    desc: `THE JOKER CHAOS is an important member of MEME, and we aim to initiate a MEME movement through MEME LABS. We are actively working towards this thought. Here, holders of THE JOKER NFTs can receive various MEME coins and NFT airdrops. Please note that we make no promises of returns. It is simply a social experiment initiated by THE JOKER CHAOS within the MEME movement. All of this will begin in Phase 2.`,
   },
 ])
 </script>
@@ -187,13 +194,14 @@ const projectList = ref([
         width: 394px;
         height: 394px;
         background: #d9d9d9;
+        object-fit: cover;
         @media screen and (max-width: 768px) {
           width: 100%;
         }
       }
       .detalis-content {
         flex: 1;
-        padding: 54px 70px;
+        padding: 54px 66px;
         @media screen and (max-width: 768px) {
           padding: 26px 8px;
           background: url(../../assets/images/mint/Rectangle4@2x2.webp) 100%

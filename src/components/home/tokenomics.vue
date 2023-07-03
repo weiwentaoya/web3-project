@@ -3,14 +3,15 @@
     <div class="title">Tokenomics</div>
     <div class="container">
       <div class="content">
-        <div class="total">888,690,000,000</div>
-        <div class="info">No Taxes, No Bullshit. It’s that simple.</div>
+        <div class="total">690,000,000,000,000</div>
+        <div class="info">No Presale, No Taxes.</div>
         <div class="desc">
-          92% of the tokens were sent to the liquidity pool, xx tokens were
-          burnt, and contract is renounced. The remaining 8% of the supply is
-          being held in a multi-sig wallet only to be used as tokens for future
-          centralized exchange listings, bridges, and liquidity pools. This
-          wallet is easily trackable with the ENS name “xxxxxxxx.eth”
+          $TJOKER is the exclusive MEME token of THE JOKER series. It has no
+          presale or taxes, and no reserves. It will be fairly distributed to
+          the Jokers and those who contribute to the development of the Jokers.
+          As the sole universal currency in the Joker world, its additional
+          functionalities will be discovered soon. Specific rules will be
+          announced in the Phase 2.
         </div>
       </div>
       <img

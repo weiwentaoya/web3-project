@@ -1,7 +1,7 @@
 <template>
   <div class="mint-footer">
     <div class="border"></div>
-    <div class="desc">© 2023 by xxx. All rights reserved！</div>
+    <div class="desc">© 2023 By The Joker chaos. All rights reserved！</div>
   </div>
 </template>
 

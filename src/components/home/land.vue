@@ -4,12 +4,14 @@
       <img class="img" src="../..//assets/images/home/Group17@2x.webp" alt="" />
       <div class="title">LAND</div>
       <p class="desc">
-        'NFT cards of varying rarity thatcontain slots for staking
-        infrastructurefacilities, along with the amount ofworks for Working.
-        Sector owners willget a stable 10% profit margin gainedfrom all
-        facilities placed in theirsector, together with profits from
-        allcompleted works. NFT cards can bepurchased in packs with Wax at
-        thepre-sale stage and, in rare cases, atauction with T-coin.
+        I don't know if I've ever truly existed in this lifetime, but now I feel
+        everyone starting to take notice of me. We are all Jokers, soloists in
+        different worlds. I want to break these rules and invite you to become a
+        chaos creator alongside me. LAND is a world belonging to the Jokers,
+        where we can freely communicate, work, entertain, create, and build.
+        Remember, the value of THE JOKER and $TJOKER that you possess will be
+        significant here. We will unveil its importance in the second and third
+        phases.
       </p>
     </div>
   </div>
@@ -83,7 +85,7 @@
 <style scoped lang="scss">
 .home-page__land {
   height: 854px;
-  margin-top: 143px;
+  // margin-top: 143px;
   background: url(../../assets/images/home/land-bg.webp) 100% no-repeat;
   background-size: 100% 100%;
   text-align: center;
@@ -117,7 +119,7 @@
       color: #560404;
       line-height: 100px;
       text-align: center;
-      margin: 200px 0 44px;
+      margin: 160px 0 44px;
       text-transform: uppercase;
       @media screen and (max-width: 768px) {
         margin: 0;
@@ -126,6 +128,7 @@
       }
     }
     .desc {
+      text-align: left;
       font-size: 20px;
       font-family: Montserrat;
       font-weight: 400;

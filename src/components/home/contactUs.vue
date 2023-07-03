@@ -3,7 +3,7 @@
     <div class="title">Contact US</div>
     <div class="desc">Welcome exchanges and discussions！</div>
     <img src="../../assets/images/home/Frame3@2x.webp" alt="" />
-    <div class="reserved">© 2023 by xxx. All rights reserved！</div>
+    <div class="reserved">© 2023 By The Joker chaos. All rights reserved！</div>
   </div>
 </template>
 
