@@ -64,9 +64,7 @@
     </div>
     <div class="nft-dialog__detalis">
       <div class="title">Detali</div>
-      <div class="content">
-        {{ nft?.nftDetail }}
-      </div>
+      <div class="content" v-html="nft?.nftDetail.replace(/\n/g, '<br>')"></div>
     </div>
     <el-dialog
       v-model="loginVisible"

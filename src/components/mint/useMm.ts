@@ -95,11 +95,11 @@ class Mm {
     const web3 = new Web3(window.ethereum)
     const networkId: any = await web3.eth.net.getId()
     console.log(`当前网络的 ID 为: ${Number(networkId)}`)
-    if (Number(networkId) !== 5) {
+    if (Number(networkId) !== 1) {
       // 切换到 Ropsten 测试网
       return window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x5' }],
+        params: [{ chainId: '0x1' }],
       })
     }
     const toAddress = nft.contractAddress
@@ -170,11 +170,11 @@ class Mm {
   async checkNetId(web3: { eth: { net: { getId: () => Promise<any> } } }) {
     const networkId: any = await web3.eth.net.getId()
     console.log(`当前网络的 ID 为: ${Number(networkId)}`)
-    if (Number(networkId) !== 5) {
+    if (Number(networkId) !== 1) {
       // 切换到 Ropsten 测试网
       return window.ethereum.request({
         method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0x5' }],
+        params: [{ chainId: '0x1' }],
       })
     }
     // if (Number(networkId) !== 1) {

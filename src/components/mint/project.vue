@@ -4,7 +4,7 @@
       <div class="name">{{ item.name }}</div>
       <div class="c-s">
         <div class="claimed">Claimed {{ AirDropContract?.totalClaim }}</div>
-        <div class="sale">
+        <div class="sale" v-if="AirDropContract?.contractAddress">
           Countdown {{ formatSeconds(AirDropContract?.saleEndTime) }}
         </div>
       </div>
