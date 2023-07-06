@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import NftDialog from './nftDialog.vue'
-import { ref, defineProps } from 'vue'
+import { ref } from 'vue'
 import { NFTDETAIL } from '@/api/nft/type'
 import { formatSeconds } from '@/utils'
 

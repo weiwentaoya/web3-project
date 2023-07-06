@@ -56,7 +56,7 @@ const navList = [
   { title: 'ROADMAP', id: 'roadMap', type: 'move' },
 ]
 import { useAppStore } from '@/store/modules/app'
-import { defineProps, onMounted, onUnmounted, ref, watch } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 const props = defineProps(['initActive'])
 
